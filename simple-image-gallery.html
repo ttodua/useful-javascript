@@ -1,0 +1,176 @@
+<div id="fulpage" style="overflow: auto;position: relative;width: 100%;height: 100%;">
+	<div id="instylee">
+		<style>
+		html { background-color:black; height:100%!important; }
+		body {height:100%!important; margin:0!important ;overflow: auto!important;}
+		.thmbs{position:relative;width:60px;z-index:3;border:1px solid;}
+		</style>
+	</div>
+
+	<div id="main_windd" 
+				style="position:relative; height:auto; min-height:100%; min-width:100%; z-index:1;left:0px;top:0px;text-align: center;display:block;background-color:black;overflow: auto; cursor:all-scroll;"> 
+		<!-- <a id="mainimg_href" style="cursor:default;" href="javascript:void(0);" onclick="event.preventDefault();" target="_blank">-->
+			<img id="mainimg" style="height:93%;position:relative;margin-top:60px;" src="#" alt="" />
+		<!-- </a> -->
+	</div>
+
+
+	<div id="t_place" style="position:fixed; top:1px; left:5px; z-index:12; color:white;">
+		<a class="a_tmb" href="#" onclick="setIMGG(this);" > <img class="thmbs" src="https://lh4.googleusercontent.com/-8AQjdZC4fF4/U146g2zOqgI/AAAAAAAABRE/3YdJIdATK5c/s0/ap_1.jpg" alt=""/></a>
+		<a class="a_tmb" href="#" onclick="setIMGG(this);" > <img class="thmbs" src="https://lh6.googleusercontent.com/-iHFcluI9oi8/U146hLDz6fI/AAAAAAAABRM/bQO0winUBbQ/s0/ap_2.jpg" alt="" /></a>
+		<a class="a_tmb" href="#" onclick="setIMGG(this);" > <img class="thmbs" src="https://lh4.googleusercontent.com/-4iX5G_yGTg0/U146gro3mLI/AAAAAAAABRA/PH_PAAYcNgw/s640/gerget.jpg" alt="" /></a>
+	 
+		<div class="show_chekbx" style="display:inline-block;">
+		<input id="mnchbxx" type="checkbox" value="yyy" onchange="fullwidth(this)">resize images in Page Size
+		</div>
+	</div>
+</div>
+
+
+
+<script>
+function setIMGG(i)
+	{
+	var img_url=i.getElementsByClassName("thmbs")[0].src;
+	document.getElementById('mainimg').src=img_url;
+	if (document.getElementById('mainimg_href')) 
+		{
+		document.getElementById('mainimg_href').href=img_url;
+		}
+	fullwidth('aaa95');
+	}
+ 
+function fullwidth(chbkx)
+	{
+	if ( chbkx == "aaa95"){ var chbkx=document.getElementById("mnchbxx"); }
+	var m1 =document.getElementById("main_windd").style;
+	var m2 =document.getElementById("mainimg").style;
+
+	//var original_img_height=getOriginalWidthOfImg(m2);
+	if (chbkx.checked)	{ m1.height = "auto"; m1.overflow="visible"; m2.height = window.innerHeight*91/100 + "px";}
+	else   				{ m1.height = "100%"; m1.overflow="auto";  m2.height = "auto"; } 
+	}
+ 
+
+function start_show()
+	{
+	var m0 =document.getElementById("fulpage");
+	document.body.innerHTML = '';
+	document.body.appendChild(m0);
+	setIMGG(document.getElementsByClassName("a_tmb")[0]);
+	if(document.getElementById('overl')) {document.getElementById('overl').style.display='none';}
+	}
+</script>
+
+<div id="overl" style="position:fixed;z-index:1004;width:3000px;height:3000px; display:block;background:lightyellow;padding:3px; top:0px; left:0px;">
+	<div style="position:relative; left:400px;top:300px; ">
+		<table>
+		<tr><td>*Start/Stop FullScreen:</td><td>click <b style="color:red;">F11</b></td> </tr>
+		<tr><td>*For Zooming:</td> <td>click <b style="color:red;">Ctrl + MouseWheel</b></td></tr>
+		</table>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!--     ---------------------------      (1)   SCROLLABLE MOVEMENT SCRIPT        ------------------------------------- -->
+<script>
+/* grab-to-pan(min) : Copyright 2013 Rob Wu <gwnRob@gmail.com> * https://github.com/Rob--W/grab-to-pan.js */
+'use strict';
+var GrabToPan = (function GrabToPanClosure() {
+  function GrabToPan(options) { this.element = options.element;  this.document = options.element.ownerDocument;   if (typeof options.ignoreTarget === 'function') {  this.ignoreTarget = options.ignoreTarget;  }
+    this.onActiveChanged = options.onActiveChanged;    this.activate = this.activate.bind(this);    this.deactivate = this.deactivate.bind(this);    this.toggle = this.toggle.bind(this);    this._onmousedown = this._onmousedown.bind(this);    this._onmousemove = this._onmousemove.bind(this);    this._endPan = this._endPan.bind(this);    var overlay = this.overlay = document.createElement('div');    overlay.style.position = 'fixed';    overlay.style.background = 'transparent';    overlay.style.display = 'block';    overlay.style.top = '0';    overlay.style.left = '0';    overlay.style.right = '0';    overlay.style.bottom = '0';    overlay.style.height = 'auto';    overlay.style.width = 'auto';    overlay.style.overflow = 'hidden';    overlay.style.zIndex = '2000000000';    overlay.className = 'grab-to-pan-grabbing';  }
+  GrabToPan.prototype = {  CSS_CLASS_GRAB: 'grab-to-pan-grab',   activate: function GrabToPan_activate() {
+      if (!this.active) {  this.active = true;  this.element.addEventListener('mousedown', this._onmousedown, true);       this.element.classList.add(this.CSS_CLASS_GRAB);    if (this.onActiveChanged) {   this.onActiveChanged(true);    }  } },
+    deactivate: function GrabToPan_deactivate() {
+      if (this.active) {
+        this.active = false;   this.element.removeEventListener('mousedown', this._onmousedown, true); this._endPan();     this.element.classList.remove(this.CSS_CLASS_GRAB);  if (this.onActiveChanged) { this.onActiveChanged(false); }}  },
+    toggle: function GrabToPan_toggle() { if (this.active) {  this.deactivate(); } else {  this.activate(); }  },
+    ignoreTarget: function GrabToPan_ignoreTarget(node) {   return node[matchesSelector]( 'a[href], a[href] *, input, textarea, button, button *, select, option'  );  },
+    _onmousedown: function GrabToPan__onmousedown(event) { if (event.button !== 0 || this.ignoreTarget(event.target)) {return; }
+      if (event.originalTarget) {  try {    event.originalTarget.tagName;   } catch (e) {   return;   }   }
+      this.scrollLeftStart = this.element.scrollLeft;    this.scrollTopStart = this.element.scrollTop;     this.clientXStart = event.clientX;      this.clientYStart = event.clientY;      this.document.addEventListener('mousemove', this._onmousemove, true);      this.document.addEventListener('mouseup', this._endPan, true);      this.element.addEventListener('scroll', this._endPan, true);      event.preventDefault();      event.stopPropagation();  this.document.documentElement.classList.add(this.CSS_CLASS_GRABBING);  },
+    _onmousemove: function GrabToPan__onmousemove(event) {   this.element.removeEventListener('scroll', this._endPan, true);
+      if (isLeftMouseReleased(event)) {    this._endPan();     return;     }
+      var xDiff = event.clientX - this.clientXStart;      var yDiff = event.clientY - this.clientYStart;      this.element.scrollTop = this.scrollTopStart - yDiff;   this.element.scrollLeft = this.scrollLeftStart - xDiff;
+      if (!this.overlay.parentNode) {     document.body.appendChild(this.overlay);  }  },
+    _endPan: function GrabToPan__endPan() {  this.element.removeEventListener('scroll', this._endPan, true);
+      this.document.removeEventListener('mousemove', this._onmousemove, true); this.document.removeEventListener('mouseup', this._endPan, true);    if (this.overlay.parentNode) {   this.overlay.parentNode.removeChild(this.overlay);   }  }
+  };
+  var matchesSelector; ['webkitM', 'mozM', 'msM', 'oM', 'm'].some(function(prefix) {  var name = prefix + 'atches';    if (name in document.documentElement) {    matchesSelector = name;    } name += 'Selector';   if (name in document.documentElement) {      matchesSelector = name;    }   return matchesSelector;  }); var isNotIEorIsIE10plus = !document.documentMode || document.documentMode > 9; var chrome = window.chrome; var isChrome15OrOpera15plus = chrome && (chrome.webstore || chrome.app);
+  var isSafari6plus = /Apple/.test(navigator.vendor) &&   /Version\/([6-9]\d*|[1-5]\d+)/.test(navigator.userAgent);
+  function isLeftMouseReleased(event) {  if ('buttons' in event && isNotIEorIsIE10plus) {  return !(event.buttons | 1);   } if (isChrome15OrOpera15plus || isSafari6plus) {    return event.which === 0;  } }  return GrabToPan;})();
+
+</script>
+
+
+<script>
+var scrollableContainer = document.getElementById('main_windd');
+var g2p = new GrabToPan({
+    element: scrollableContainer,         // required
+    onActiveChanged: function(isActive) { // optional
+        if (window.console) { // IE doesn't define console unless the devtools are open
+            console.log('Grab-to-pan is ' + (isActive ? 'activated' : 'deactivated'));
+        }
+    }
+});
+
+g2p.activate();//g2p.deactivate();
+</script>
+
+
+
+
+
+
+
+
+
+
+<!--     ---------------------------     (2)    FUL SCREEN SCRIPT        ------------------------------------- -->
+<script>
+//Native FullScreen JavaScript API (min)-------------Assumes Mozilla naming conventions instead of W3C for now
+(function() {
+	var fullScreenApi = { supportsFullScreen: false,isFullScreen: function() { return false; }, requestFullScreen: function() {}, cancelFullScreen: function() {},fullScreenEventName: '',prefix: ''},browserPrefixes = 'webkit moz o ms khtml'.split(' ');
+	if (typeof document.cancelFullScreen != 'undefined') {	fullScreenApi.supportsFullScreen = true;} 
+	else {	for (var i = 0, il = browserPrefixes.length; i < il; i++ ) {	fullScreenApi.prefix = browserPrefixes[i];
+		if (typeof document[fullScreenApi.prefix + 'CancelFullScreen' ] != 'undefined' ) {fullScreenApi.supportsFullScreen = true; break;}	}}
+	if (fullScreenApi.supportsFullScreen) {	fullScreenApi.fullScreenEventName = fullScreenApi.prefix + 'fullscreenchange';
+		fullScreenApi.isFullScreen = function() {switch (this.prefix) {	case '':return document.fullScreen;	case 'webkit':	return document.webkitIsFullScreen;	default:return document[this.prefix + 'FullScreen'];}}
+		fullScreenApi.requestFullScreen = function(el) {return (this.prefix === '') ? el.requestFullScreen() : el[this.prefix + 'RequestFullScreen']();	}
+		fullScreenApi.cancelFullScreen = function(el) {	return (this.prefix === '') ? document.cancelFullScreen() : document[this.prefix + 'CancelFullScreen']();}	}
+	if (typeof jQuery != 'undefined') {	jQuery.fn.requestFullScreen = function() {return this.each(function() {	var el = jQuery(this);	if (fullScreenApi.supportsFullScreen) {	fullScreenApi.requestFullScreen(el);}});};}	window.fullScreenApi = fullScreenApi;})();
+</script>
+
+
+
+<script>
+if (window.fullScreenApi.supportsFullScreen) {alert('YES: Your browser supports FullScreen');} 
+else { alert('SORRY: Your browser does not support FullScreen'); }
+
+var startedd=false;
+function checkkey(e) 
+	{
+	if (window.fullScreenApi.supportsFullScreen && !startedd)
+		{
+		e = e|| window.event;
+		if (e.keyCode == '122') 
+			{
+			start_show();
+			startedd=true;
+			}
+		}
+	}
+document.onkeyup = checkkey;
+document.onpress = checkkey;
+</script>
+
