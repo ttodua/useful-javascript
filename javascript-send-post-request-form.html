@@ -1,0 +1,24 @@
+===============================USAGE=====================
+postForm( {deletecityy:'hihi',  surname: 'blabla'}, 'Are you sure?' , 'http://yoursite.com' , '_blank');
+
+<script type="text/javascript">
+// LIVE <FORM> creation 
+function postForm(params,ConfirmMessage, path, method) 
+{
+	if (typeof ConfirmMessage != 'undefined' &&  ConfirmMessage != '') { if(!confirm(ConfirmMessage)){return;}}
+	
+	method = method || "POST";
+	path   = path	|| "";
+	window = window || "";
+	var form = document.createElement("form");form.setAttribute("method", method);form.setAttribute("action", path); form.setAttribute("target", window); 
+	for(var key in params) {
+		if(params.hasOwnProperty(key)) 
+		{
+			var hiddenField = document.createElement("input");	hiddenField.setAttribute("type", "hidden");
+			hiddenField.setAttribute("name", key);				hiddenField.setAttribute("value", params[key]);
+			form.appendChild(hiddenField);
+		}
+	}
+	document.body.appendChild(form); form.submit();
+}
+</script>
