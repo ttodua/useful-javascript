@@ -1,0 +1,118 @@
+<script>
+function start_slider_detect(elementID)
+	{
+	var mainBlock	=document.getElementById(elementID);
+	var	sliderMenu	= mainBlock.getElementsByClassName("slider")[0];
+	var myCounter	= mainBlock.getElementsByClassName("myIndicator")[0];
+	myCounter.innerHTML=sliderMenu.value;
+	//Display Minimum/maximum Amounts
+	mainBlock.getElementsByClassName("minnn")[0].innerHTML	= sliderMenu.getAttribute("min");;
+	mainBlock.getElementsByClassName("maxxx")[0].innerHTML	= sliderMenu.getAttribute("max");
+	sliderMenu.oninput= function() 
+		{
+		myCounter.innerHTML=sliderMenu.value;
+		}
+	}
+</script>
+<!--  
+--------------------------------
+JUST CHANGE THE "myBlock1" names
+--------------------------------
+-->
+
+<div id="myBlock1">
+    <p>With big steps: <span class="myIndicator"></span>.</p>
+    <span class="minnn"></span>
+		<input class="slider" style="width:200px" type="range" min="0" max="100" step="10" value="3"/>
+	<span class="maxxx"></span>
+	
+	<script>start_slider_detect("myBlock1");</script>
+</div>
+
+
+
+<div id="myBlock2">
+    <p>With small steps: <span class="myIndicator"></span>.</p>
+    <span class="minnn"></span>
+		<input class="slider" style="width:200px; border:1px solid #999;" type="range" min="0" max="100" step="1" value="3"/>
+	<span class="maxxx"></span>
+	
+	<script>start_slider_detect("myBlock2");</script>
+</div>
+
+
+
+
+
+
+
+
+<br/><br/><br/>
+<div style="background-color:yellow; color:red;text-align:center;">SECOND Method</div>
+<br/>
+
+
+<style>
+/* defaults */
+.volum_ticks{
+	border-left:0px !important;
+	border-top:0px !important;
+	border-bottom:0px !important;
+	border-right:1px solid #222;
+    display: inline-block;
+    background-color: #4c4c4c;
+    cursor:pointer;
+	margin:0px!important;
+	padding:0px!important;
+	height: 15px;
+}
+.volum_block{display:inline-block;} 
+.VolumMin{display:inline-block;}
+.VolumMax{display:inline-block;}
+.volum_ticks:hover{background-color:#bcbcbc !important; }
+.volum_controller{width:90px;display:inline-block;text-align:center;}
+.volume_indicator{}
+</style>
+<script type="text/javascript">
+//length: how many bars
+//nowselected: which bar is selected
+function drawvolumecontroller(controlerID,length,nowselected){    
+	var cntrler= document.getElementById(controlerID);
+	var minimumest = 1; //or 1
+	var newCont = '<div class="VolumMin">'+minimumest+'</div><div class="volum_controller">';
+
+	var bck_color;
+	var selectorr= cntrler.getElementsByClassName("volum_controller")[0];
+	var widthtt= (selectorr.scrollWidth - length)/(length+2); 
+    for (i=minimumest;i<=length;i++)
+		{
+		if (i <= nowselected)	
+			{bck_color = '#898989';} 
+		else 					
+			{bck_color = '#ffffff';} 
+
+		newCont = newCont +
+		'<div onmousedown="volumecontrolchanged(\'' + controlerID + '\','+ length +',' + i + ')"' +
+		'style="background-color:'+ bck_color +';width:'+widthtt +'px;" class="volum_ticks"></div>';
+		}
+
+	newCont = newCont + '</div><div class="VolumMax">'+length+'</div><div class="volume_indicator">'+nowselected+'</div>';
+	cntrler.innerHTML = newCont;
+}
+function volumecontrolchanged(controllerID, lengthh,newvolume){
+    drawvolumecontroller(controllerID,lengthh,newvolume);
+    document.getElementById(controllerID).getElementsByClassName("volume_indicator")[0].innerHTML = newvolume;
+}
+</script>
+
+<div id="my_fisrt_control" class="volum_block">
+	<div class="volum_controller">This will be rewritten By JS</div>
+</div>
+
+<script>
+drawvolumecontroller('my_fisrt_control',10,8);
+</script>
+
+
+
+
