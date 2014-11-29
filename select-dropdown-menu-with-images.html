@@ -1,0 +1,56 @@
+<!-- not tested in mobiles -->
+<style>
+#image-dropdown #liness {display:inline-block;border:1px solid;position:absolute; left:10px;}
+#image-dropdown .line_holder {height: 32px; overflow: hidden; border:1px solid; cursor:pointer; background-color: white; }
+#image-dropdown .line_holder  .img_holder{display: inline-block; position:relative;}
+#image-dropdown .line_holder .img_holder img.flagimgs{height:30px;width:30px;}
+#image-dropdown .line_holder .iTEXT{display: inline-block; margin: 0px 5px 0px; position:relative; top:-11px;}
+
+
+#image-dropdown #downar {float:right;background-color:#B4E5E9;padding: 3px 2px 2px 2px;border:0px solid;}
+</style>
+
+
+<div id="image-dropdown">
+	<div id="liness"  style="height:30px;overflow:hidden;" onmouseleave="hideeDR();">
+		<div class="line_holder" onclick="drpd_start(this);" onmouseover="showDR();">
+			<div class="img_holder"><img class="flagimgs" src="http://www.google.com/tv/images/socialyoutube.png"/></div>
+			<div class="iTEXT"> First</div>
+		</div>
+		<div class="line_holder" onclick="drpd_start(this);" onmouseover="showDR();">
+			<div class="img_holder"><img class="flagimgs" src="http://www.google.com/cloudprint/learn/images/icons/fiabee.png" /></div>
+			<div class="iTEXT"> Second</div>
+		</div>
+		<div class="line_holder" onclick="drpd_start(this);" onmouseover="showDR();">
+			<div class="img_holder"><img class="flagimgs" src="http://www.google.com/cloudprint/learn/images/icons/cloudprintlite.png" /></div>
+			<div class="iTEXT"> THird</div>
+		</div>
+	</div>
+</div>
+
+<script>
+var dlines=document.getElementById("liness");
+var initialHeight= dlines.clientHeight;
+function showDR(){dlines.style.height="auto";				dlines.style.overflow="y-scroll";}	
+function hideeDR(){dlines.style.height=initialHeight + "px";	dlines.style.overflow="hidden";}
+//dlines.addEventListener('mouseover', showOrHide, false);
+//dlines.addEventListener('click',showOrHide , false);
+
+
+function drpd_start(imgParent)
+{
+	hideeDR();
+	var mainDIVV = document.getElementById("liness");
+	imgParent.parentNode.removeChild(imgParent);
+	mainDIVV.insertBefore(imgParent, mainDIVV.childNodes[0]);
+	DRshowArrow();
+}
+
+function DRshowArrow()
+{
+	if(old_Arrow = document.getElementById('downar'))	{	old_Arrow.parentNode.removeChild(old_Arrow); }
+	document.getElementsByClassName("line_holder")[0].innerHTML += '<div id="downar" style="height:' + dlines.clientHeight + 'px;">&#8897;</div>';
+}
+DRshowArrow();
+	
+</script>
