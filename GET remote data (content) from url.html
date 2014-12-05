@@ -65,7 +65,7 @@ function myRequest_2(){
 =============================== EXAMPLE3: Show values parallely, while user types anything inside form====================
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script>
-	$(function () {
+	$(function () { 
 		$("#usersearchin").keyup(function (e) {
 			$.post("myInfo.php", $("#form_search").serializeArray(), function (data) { data= data || "nothing ouputed";
 				alert('char entered! digg into this script to modify the behaviour');//$("#res").html(data).show();
