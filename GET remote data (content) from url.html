@@ -17,7 +17,23 @@ else if (method  == "get"){xmlhttp.send(null);}
 }
 </script>
 
-
+================================================================
+To show "LOADING" message while the request is being proccessed, use these function while STARTED and ENDED:
+wait_show();
+wait_hide();
+<script type="text/javascript">
+function wait_show()
+{
+	var innerDiv = document.createElement('div'); innerDiv.id = 'black_backgr';
+	innerDiv.setAttribute("style", 'background: black;height: 1000px;left: 0px;opacity: 0.9;position: fixed;top: 0px;width: 100%;z-index: 1000;');
+	innerDiv.innerHTML = '<div id="wait" style="width:69px;height:89px;border:1px solid white;background-color:black;position:absolute;top:50%;left:50%;padding:2px;font-size:2em;">Loading..</div>';
+	var BODYYY = document.getElementsByTagName('body')[0];	BODYYY.insertBefore(innerDiv, BODYYY.childNodes[0]);
+}
+function wait_hide()
+{
+	var DIIV = document.getElementById("black_backgr");	DIIV.parentNode.removeChild(DIIV);
+}
+</script>
 
 
 
