@@ -54,8 +54,9 @@ function wait_hide()
 
 
 =============================== (Jquery) EXAMPLE2: POST ==============================
-USAGE:		myRequest_2("POST","myInfo.php","d=kap&e=po");
+p.s. instead of manually typing ("myParameter1=kap&e=po"), you can get them directly from a from: serialize(document.forms["FORM_NAME"]);
 
+USAGE:		myRequest_2("POST","myInfo.php","myParameter1=kap&e=po");
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript">
 function myRequest_2(){
