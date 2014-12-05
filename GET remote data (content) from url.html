@@ -17,8 +17,13 @@ else if (method  == "get"){xmlhttp.send(null);}
 }
 </script>
 
-================================================================
-To show "LOADING" message while the request is being proccessed, use these function while STARTED and ENDED:
+
+
+
+
+
+=======================================EXAMPLE: show "LOADING" message during request =========================
+use these function while STARTED and ENDED:
 wait_show();
 wait_hide();
 <script type="text/javascript">
@@ -34,6 +39,13 @@ function wait_hide()
 	var DIIV = document.getElementById("black_backgr");	DIIV.parentNode.removeChild(DIIV);
 }
 </script>
+
+
+
+
+
+
+
 
 
 
@@ -62,6 +74,13 @@ function myRequest_2(){
 
 
 
+
+
+
+
+
+
+
 =============================== EXAMPLE3: Show values parallely, while user types anything inside form====================
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script>
@@ -77,6 +96,13 @@ function myRequest_2(){
 	<input  name="usersearchin" id="usersearchin" size="20" style="width:100px;"/>
 	<div id="res" style="overflow: auto; max-height: 200px; width: 410px;top:50px;position: fixed;display: none;"></div>
 </form>
+
+
+
+
+
+
+
 
 
 
@@ -120,4 +146,3 @@ function get_remot_data(liiink){
 	})(jQuery.ajax);$.ajax({});
 }
 </script>
-	
