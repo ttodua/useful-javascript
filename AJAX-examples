@@ -1,1 +1,21 @@
-see the page - https://github.com/tazotodua/useful-javascript/blob/master/GET%20remote%20data%20%28content%29%20from%20url.html
+===============================EXAMPLE1: POST or GET request (without Jquery) ===============================
+USAGE:		myRequest_1("d=kap&e=po", "myInfo.php","POST", true); [p.s. the fourth parameter means "synchronous":  TRUE(continue the other JS scripts) FALSE(wait before this request get's an answer)
+	
+<script type="text/javascript">
+function myRequest_1(parameters, url, method, asynchronousOrNot){
+	method = method.toLowerCase() || "get"; if (method  == "get") {url=url+'?'+parameters+'&MakeRandomValuedLinkToAvoidCache=' + Math.random();}
+	try {var xmlhttp=new XMLHttpRequest();}catch(e){try {var xmlhttp=new ActiveXObject("Msxml2.XMLHTTP");} catch(e) {new xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");}}
+	xmlhttp.onreadystatechange=function(){if (xmlhttp.readyState==4){
+		alert("STATE:"+ xmlhttp.readyState + ";\nSTATUS:" + xmlhttp.status +";\nRESPONSED:" +xmlhttp.responseText);
+		}
+	}
+	xmlhttp.open(method,url,asynchronousOrNot); 
+	if (method  == "post"){xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");xmlhttp.send(parameters);}
+	else if (method  == "get"){xmlhttp.send(null);}
+}
+</script>
+
+
+
+//during request, you can show "PLEASE WAIT" or etc..
+https://github.com/tazotodua/useful-javascript/blob/master/during-request-show-%22WAIT%22
