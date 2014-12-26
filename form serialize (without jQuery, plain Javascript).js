@@ -1,8 +1,7 @@
 EXAMPLE: var myData= serializeForm(  document.getElementById('MyFormIDD')  )  ; 
 
 
-<script type="text/javascript">
-//minified verion of https://code.google.com/p/form-serialize/source/browse/trunk/serialize-0.1.js
+<script type="text/javascript">          //minified verion of https://code.google.com/p/form-serialize/source/browse/trunk/serialize-0.1.js
 function serialize (form) {               
 	if (!form || form.nodeName !== "FORM") { return; }
 	var i, j, q = [];
