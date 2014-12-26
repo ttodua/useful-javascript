@@ -1,4 +1,4 @@
-//
+//https://github.com/tazotodua/useful-javascript/
 function serializeForm(formID) {
 	form = document.getElementById(formID) || document.forms[0];
 	var elems = form.elements;
