@@ -1,0 +1,17 @@
+show results parallely while you type in a field, use this code:
+
+
+<form action="" method="post" id="form_search">
+	<input  name="usersearchin" id="usersearchin" size="20" style="width:100px;"/>
+	<div id="res" style="overflow: auto; max-height: 200px; width: 410px;top:50px;position: fixed;display: none;"></div>
+</form>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+	$(function () { 
+		$("#usersearchin").keyup(function (e) {
+			$.post("myInfo.php", $("#form_search").serializeArray(), function (data) { data= data || "nothing ouputed";
+				alert('char entered! digg into this script to modify the behaviour');//$("#res").html(data).show();
+			});
+		});
+	});
+</script>
