@@ -1,6 +1,4 @@
-EXAMPLE: 
-var myData = serializeForm('MyFormIDD'); 
-//alert(myData);
+EXAMPLE: alert(  serializeForm('MyFormIDD')   ); 
 
 <script type="text/javascript">
 // https://github.com/tazotodua/useful-javascript/
