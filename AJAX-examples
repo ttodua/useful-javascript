@@ -28,11 +28,12 @@ USAGE:     myRequest_2("POST","e.php","myParameter1=kap&e=po");
 	
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript">
+var responseee;
 function myRequest_2(method,target,parameters){
 	$.post(target, parameters ,
 		function(data,status){
 			if (status == "success") {
-				alert( "\n\nRESPONSE:\n" + data); 
+				responseee="\n\nRESPONSE:\n" + data;  alert(responseee);
 				/* if you want get serialized array from php, then:
 				1) in php, use this:
 				echo json_encode(  array('myname'=>'Frank', 'surname'=>'Klobert')    );
