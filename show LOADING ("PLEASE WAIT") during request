@@ -1,0 +1,15 @@
+=======================================show "LOADING.." message during request =========================
+use the functions SHOW_waiter() and HIDE_waiter()  whenever you want:
+<script type="text/javascript">
+function SHOW_waiter()
+{
+	var innerDiv = document.createElement('div'); innerDiv.id = 'black_backgr';
+	innerDiv.setAttribute("style", 'background: black;height: 1000px;left: 0px;opacity: 0.9;position: fixed;top: 0px;width: 100%;z-index: 1000;');
+	innerDiv.innerHTML = '<div id="wait" style="width:69px;height:89px;border:1px solid white;background-color:black;position:absolute;top:50%;left:50%;padding:2px;font-size:2em;">Loading..</div>';
+	var BODYYY = document.getElementsByTagName('body')[0];	BODYYY.insertBefore(innerDiv, BODYYY.childNodes[0]);
+}
+function HIDE_waiter()
+{
+	var DIIV = document.getElementById("black_backgr");	DIIV.parentNode.removeChild(DIIV);
+}
+</script>
