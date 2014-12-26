@@ -1,4 +1,4 @@
-<!-- https://github.com/tazotodua/simple-javascript-popup -->
+<!-- https://github.com/tazotodua/useful-javascript/blob/master/simple-javascript-popup.html -->
 
 
 			<h1>Simplest Popups:</h1>
@@ -28,7 +28,7 @@ function show_popup_by(object,value)
 	
 	//create window
 	var innerDiv = document.createElement('div'); innerDiv.id = 'popupp_' +randm_id;
-	innerDiv.setAttribute("style",'background-color: white;border: 6px solid white;border-radius: 10px;display: block; left: 30%;min-height: 100px;min-width: 350px;overflow: auto;max-height:80%;max-width:92%; padding: 15px;position: fixed;top: 5%;transition: visibility 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0s;z-index: 1001;');
+	innerDiv.setAttribute("style",'background-color: white;border: 6px solid white;border-radius: 10px;display: block; min-height: 100px;min-width: 350px;overflow: auto;max-height:80%;max-width:92%; padding: 15px; position: fixed; text-align: center; top: 25%; left: 50%;transform: translate(-50%, 0);z-index: 1001;');
 	innerDiv.innerHTML = '<div style="background-color:#FF0075; border-radius: 5px; float: right; font-weight: 700;margin: -15px -10px 0px 0px;"><a href="javascript:pop_hide(\'popupp_' +randm_id+'\');">X</a></div>' + contentt;
 	//attach to body
 	var BODYYY = document.getElementsByTagName('body')[0];	BODYYY.insertBefore(innerDiv, BODYYY.childNodes[0]);
