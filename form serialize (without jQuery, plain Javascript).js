@@ -43,6 +43,4 @@ function serialize (form) {
   }
   return q.join("&");
 }
-
-//https://github.com/tazotodua/useful-javascript/
 </script>
