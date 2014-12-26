@@ -1,8 +1,8 @@
-EXAMPLE: var myData= serialize(  document.getElementById('MyFormIDD')  )  ; 
+EXAMPLE: var myData= serializeForm(  document.getElementById('MyFormIDD')  )  ; 
 
 
 <script type="text/javascript">          //minified verion of https://code.google.com/p/form-serialize/source/browse/trunk/serialize-0.1.js
-function serialize (form) {               
+function serializeForm (form) {               
   if (!form || form.nodeName !== "FORM") { return; }
   var i, j, q = [];
   for (i = form.elements.length - 1; i >= 0; i = i - 1) {
