@@ -29,7 +29,7 @@ function show_popup_by(object,value)
 	//create window
 	var innerDiv = document.createElement('div'); innerDiv.id = 'popupp_' +randm_id;
 	innerDiv.setAttribute("style",'background-color: white;border: 6px solid white;border-radius: 10px;display: block; min-height: 100px;min-width: 350px;overflow: auto;max-height:80%;max-width:92%; padding: 15px; position: fixed; text-align: center; top: 25%; left: 50%;transform: translate(-50%, 0);z-index: 1001;');
-	innerDiv.innerHTML = '<div style="background-color:#C0BCBF; border-radius: 55px; font-family: arial; float: right; font-weight: 700;margin: -15px -10px 0px 0px;"><a href="javascript:pop_hide(\'popupp_' +randm_id+'\');" style="display: block;margin:-5px 0 0 0;font-size:1.6em;">x</a></div>' + contentt;
+	innerDiv.innerHTML = '<div style="background-color:#C0BCBF; border-radius: 55px; padding:5px; font-family: arial; float: right; font-weight: 700;margin: -15px -10px 0px 0px;"><a href="javascript:pop_hide(\'popupp_' +randm_id+'\');" style="display: block;margin:-5px 0 0 0;font-size:1.6em;">x</a></div>' + contentt;
 	//attach to body
 	var BODYYY = document.getElementsByTagName('body')[0];	BODYYY.insertBefore(innerDiv, BODYYY.childNodes[0]);
 }
