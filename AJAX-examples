@@ -46,3 +46,4 @@ function myRequest_2(method,target,parameters){
 </script>
 
 
+***p.s. p.s. instead of manually typing ("myParameter1=kap&e=po"), you can get them directly from a FORM: serialize(document.forms["FORM_NAME"]);
