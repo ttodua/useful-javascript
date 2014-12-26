@@ -1,16 +1,16 @@
 ===============================METHOD 1: POST or GET request (without Jquery) ===============================
-USAGE:		myRequest_1("d=kap&e=po", "myInfo.php","POST", true); [p.s. the fourth parameter means "synchronous":  TRUE(continue the other JS scripts) FALSE(wait before this request get's an answer)
+USAGE:		myRequest_1("d=kap&e=po", "myInfo.php","POST"; 
 	
 <script type="text/javascript">
 var responseee;
-function myRequest_1(parameters, url, method, asynchronousOrNot){
+function myRequest_1(parameters, url, method){
 	method = method.toLowerCase() || "get"; if (method  == "get") {url=url+'?'+parameters+'&MakeRandomValuedLinkToAvoidCache=' + Math.random();}
 	try{try{var xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");} catch( e ){var xmlhttp=new ActiveXObject("Msxml2.XMLHTTP");}}catch(e){var xmlhttp = new XMLHttpRequest();}
 	xmlhttp.onreadystatechange=function(){if (xmlhttp.readyState==4){
 		responseee ="STATE:"+ xmlhttp.readyState + ";\nSTATUS:" + xmlhttp.status +";\nRESPONSED:" +xmlhttp.responseText;   alert(responseee);
 		}
 	}
-	xmlhttp.open(method,url,asynchronousOrNot); 
+	xmlhttp.open(method,url, true); 
 	if (method  == "post"){xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");xmlhttp.send(parameters);}
 	else if (method  == "get"){xmlhttp.send(null);}
 }
