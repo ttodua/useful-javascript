@@ -4,7 +4,7 @@ USAGE:		myRequest_1("d=kap&e=po", "myInfo.php","POST", true); [p.s. the fourth p
 <script type="text/javascript">
 function myRequest_1(parameters, url, method, asynchronousOrNot){
 	method = method.toLowerCase() || "get"; if (method  == "get") {url=url+'?'+parameters+'&MakeRandomValuedLinkToAvoidCache=' + Math.random();}
-	try {var xmlhttp=new XMLHttpRequest();}catch(e){try {var xmlhttp=new ActiveXObject("Msxml2.XMLHTTP");} catch(e) {new xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");}}
+	try{try{var xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");} catch( e ){var xmlhttp=new ActiveXObject("Msxml2.XMLHTTP");}}catch(e){var xmlhttp = new XMLHttpRequest();}
 	xmlhttp.onreadystatechange=function(){if (xmlhttp.readyState==4){
 		alert("STATE:"+ xmlhttp.readyState + ";\nSTATUS:" + xmlhttp.status +";\nRESPONSED:" +xmlhttp.responseText);
 		}
