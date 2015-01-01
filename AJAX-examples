@@ -1,13 +1,19 @@
+NOTICE:  in the below function, there are included "SHOW_waiting" function( during request, there you will see "PLEASE WAIT" message). For that, at first, you MUST include these  functions into your file.. :  https://github.com/tazotodua/useful-javascript/blob/master/during-request-show-%22WAIT%22
+
+
+
+=============================================================================================================
 ===============================METHOD 1: POST or GET request (without Jquery) ===============================
+=============================================================================================================
 USAGE:		myRequest_1("d=kap&e=po", "myInfo.php","POST", "alert('Hi,completed');" );
 	
 <script type="text/javascript">
 var responseee;
 function myRequest_1(parameters, url, method, passedFunction){
 	method = method.toLowerCase() || "get"; if (method  == "get") {url=url+'?'+parameters+'&MakeRandomValuedLinkToAvoidCache=' + Math.random();}
-	try{try{var xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");} catch( e ){var xmlhttp=new ActiveXObject("Msxml2.XMLHTTP");}}catch(e){var xmlhttp = new XMLHttpRequest();}
-	xmlhttp.onreadystatechange=function(){if (xmlhttp.readyState==4){
-		responseee ="STATE:"+ xmlhttp.readyState + ";\nSTATUS:" + xmlhttp.status +";\nRESPONSED:" +xmlhttp.responseText;
+	SHOW_waiting();	try{try{var xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");} catch( e ){var xmlhttp=new ActiveXObject("Msxml2.XMLHTTP");}}catch(e){var xmlhttp = new XMLHttpRequest();}
+	xmlhttp.onreadystatechange=function(){if (xmlhttp.readyState==4){ HIDE_waiting();
+		responseee ="STATE:"+ xmlhttp.readyState + ";\nSTATUS:" + xmlhttp.status +";\nRESPONSED:" +xmlhttp.responseText; 
 		//let's execute our desired function
 		eval(passedFunction); 
 		}
@@ -20,20 +26,19 @@ function myRequest_1(parameters, url, method, passedFunction){
 
 
 
-***** p.s. during request, you can show "PLEASE WAIT" (or etc):  https://github.com/tazotodua/useful-javascript/blob/master/during-request-show-%22WAIT%22
 
 
-
-
-===============================METHOD 2: POST request (Jquery) ===============================
+=============================================================================================
+===============================METHOD 2: POST request (Jquery) ==============================
+=============================================================================================
 USAGE:     myRequest_2("POST","e.php","myParameter1=kap&e=po");
 	
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript">
 var responseee;
-function myRequest_2(method,target,parameters){
+function myRequest_2(method,target,parameters){ SHOW_waiting();
 	$.post(target, parameters ,
-		function(data,status){
+		function(data,status){ HIDE_waiting();
 			if (status == "success") {
 				responseee="\n\nRESPONSE:\n" + data;  alert(responseee);
 				/* if you want get serialized array from php, then:
@@ -50,4 +55,12 @@ function myRequest_2(method,target,parameters){
 </script>
 
 
-***p.s. p.s. instead of manually typing ("myParameter1=kap&e=po"), you can get them directly from a FORM: serialize(document.forms["FORM_NAME"]);
+
+================================================================================================
+=====================================           OTHER NOTES           ==========================
+================================================================================================
+***p.s. instead of manually typing ("myParameter1=kap&e=po"), you can get all fieldnames and their values directly from a FORM: 
+ jQuery:
+	var stringg = $("#formId").serialize();
+ Simple Javascript
+	var stringg = serialize(document.forms["FORM_NAME"]); //but include custom "FORM SERIALIZE" function, found at: https://github.com/tazotodua/useful-javascript
