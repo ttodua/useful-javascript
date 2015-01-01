@@ -1,5 +1,5 @@
 =======================================show "LOADING.." message during request =========================
-whenever you want, use functions SHOW_waiting()  and  HIDE_waiting():
+whenever you want, use functions SHOW_waiting();  and  HIDE_waiting();
 
 
 <script type="text/javascript">
