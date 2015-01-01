@@ -1,8 +1,5 @@
-===============================USAGE=====================
-postForm( {deletecityy:'hihi',  surname: 'blabla'}, 'Are you sure?' , 'http://yoursite.com' , '_blank');
-
 <script type="text/javascript">
-// LIVE <FORM> creation     //https://github.com/tazotodua/useful-javascript
+//USAGE:      postForm( {deletecityy:'hihi',  surname: 'blabla'}, 'Are you sure?' , 'http://yoursite.com' , '_blank');
 function postForm(params,ConfirmMessage, path, method) 
 {
 	if (typeof ConfirmMessage != 'undefined' &&  ConfirmMessage != '') { if(!confirm(ConfirmMessage)){return;}}
@@ -20,5 +17,5 @@ function postForm(params,ConfirmMessage, path, method)
 		}
 	}
 	document.body.appendChild(form); form.submit();
-}
+} //source: https://github.com/tazotodua/useful-javascript
 </script>
