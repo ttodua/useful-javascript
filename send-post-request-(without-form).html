@@ -1,13 +1,13 @@
 <script type="text/javascript">
 //USAGE:      postForm( {deletecityy:'hihi',  surname: 'blabla'}, 'Are you sure?' , 'http://yoursite.com' , '_blank');
-function postForm(params,ConfirmMessage, path, method) 
+function postForm(params,ConfirmMessage, path, method, targett) 
 {
 	if (typeof ConfirmMessage != 'undefined' &&  ConfirmMessage != '') { if(!confirm(ConfirmMessage)){return;}}
 	
-	method = method || "POST";
-	path   = path	|| "";
-	window = window || "";
-	var form = document.createElement("form");form.setAttribute("method", method);form.setAttribute("action", path); form.setAttribute("target", window); 
+	method	= method || "POST";
+	path   	= path	|| "";
+	targett	= targett || "";
+	var form = document.createElement("form");form.setAttribute("method", method);form.setAttribute("action", path); form.setAttribute("target", targett); 
 	for(var key in params) {
 		if(params.hasOwnProperty(key)) 
 		{
