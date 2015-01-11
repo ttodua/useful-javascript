@@ -16,10 +16,8 @@
 
 <script type="text/javascript">
 //simple popup form
-function show_popup_by(object,value)
-{
+function show_popup_by(object,value){
 	if (object=='ID') {contentt=document.getElementById(value).innerHTML;} else if(object=='TEXT')  {contentt=value;}
-	
 	var randm_id=Math.floor((Math.random()*100000000)); //random id
 	//show black window
 	var innerDiv = document.createElement('div'); innerDiv.id = 'black_backgr';
@@ -34,13 +32,29 @@ function show_popup_by(object,value)
 	var BODYYY = document.getElementsByTagName('body')[0];	BODYYY.insertBefore(innerDiv, BODYYY.childNodes[0]);
 }
 
-function pop_hide(rand_iddd)
-{
-	var DIIV = document.getElementById("black_backgr");	DIIV.parentNode.removeChild(DIIV);
-	var DIIV = document.getElementById(rand_iddd);	DIIV.parentNode.removeChild(DIIV);
+function pop_hide(rand_iddd){
+	var DIIV = document.getElementById("black_backgr"); DIIV.parentNode.removeChild(DIIV); var DIIV = document.getElementById(rand_iddd);	DIIV.parentNode.removeChild(DIIV);
 }
+</script>
+
+<div id="mymessg"  class="My_TARGET_Hiddens" style="display:none;"> <!-- actually, display:none is not needed, because in the below script,we can use "hide_popuping" function automatically -->
+	<div style='color:red;'>This is a styled div! </br><span style='color:blue'>And inside it,here is a styled span</span></div>
+</div>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
 //all divs, which has a classname "My_TARGET_Hiddens", will be automatically hidden on page load...
 window.onload = function(){ hide_popuping_divs("My_TARGET_Hiddens"); };
 function hide_popuping_divs(classnameee)
@@ -53,13 +67,10 @@ function hide_popuping_divs(classnameee)
 </script>
 
 
-
-<div id="mymessg"  class="My_TARGET_Hiddens"> <!-- display:none is not needed, because we use hide_popuping_divs function automatically -->
-	<div style='color:red;'>This is a styled div! </br><span style='color:blue'>And inside it,here is a styled span</span></div>
-</div>
-
 <br/><br/>
 (p.s. to use special characters in simple popup, use HTML entities (<a href="http://dev.w3.org/html5/html-author/charref">1</a> or <a href="http://www.elizabethcastro.com/html/extras/entities.html">2</a>)
+
+
 
 
 
@@ -90,63 +101,43 @@ function hide_popuping_divs(classnameee)
 <div id="black_backgrounddd" style="	visibility:hidden;	background:black;	height:3000px;	width:4000px;	left:-1000px;	opacity:0.7;	position:fixed;  top:-600px; z-index:33;	  transition:all 0.2s ease-out;-webkit-transition:opacity 0.2s;transition:opacity 0.2s;-moz-transition:all 0.2s ease-out;-o-transition:all 0.2s ease-out;"></div>
 
 <script type="text/javascript">
-var HIDE_INSTANTLY = false;
+var HIDE_INSTANTLY = true;
 var SHOW_INSTANTLY = false;
-var MINIMUM_ZOOMED_SIZE = 2/3;		//POPUP size wont go below this
+var bckg = document.createElement('div'); bckg.setAttribute('id','black_backgrounddd');bckg.style='visibility:hidden; background:black;	height:3000px; width:4000px; left:-1000px; opacity:0.8;	position:fixed;  top:-600px; z-index:8883; transition:all 0.2s ease-out;-webkit-transition:opacity 0.2s; transition:opacity 0.2s; -moz-transition:all 0.2s ease-out; -o-transition:all 0.2s ease-out;';	document.body.appendChild(bckg);
 
-
-var bckg=document.getElementById('black_backgrounddd');
-function FadeShowHide(IDD , my_action)
-{	
+function FadeShowHide(IDD , my_action)	{	
 	var starttted=true;
-	var ppdiv= document.getElementById(IDD);	//get popup div
-	my_action = typeof my_action !== 'undefined' ? my_action : false;
-	var ActAMOUNT	=	60;			//amount of actions	
-	var movement_interval = 15; 	//1000 / ActAMOUNT; // DURATION of each step(miliseconds)
+	var ppdiv= document.getElementById(IDD);
+	my_action = my_action || false;
+	var ActAMOUNT	=	20;		//amount of actions	
+	var movement_interval = 6; 	//	1000/ActAMOUNT = DURATION of each step(miliseconds)
 	
-	//SHOW	
-	if (my_action == 'show')
-	{
-		//show step-by-step
-		var PlusOrMinus = 1;
-		bckg.style.visibility='visible';
-		ppdiv.style.visibility = 'visible';
-		var counte = ActAMOUNT/2 ;  //start from HALF and goes to FULL
-		
-		//if enabled SHOW_INSTANTLY
+	if (my_action == 'show')		{
+		//1)SHOW SLOWLY
+		var PlusOrMinus = 1; bckg.style.visibility='visible';ppdiv.style.visibility = 'visible';	var counte = ActAMOUNT*2 /3;
+		//2)SHOW INSTANTLY
 		if (SHOW_INSTANTLY) {ppdiv.style.opacity = '1'; ppdiv.style.display = "block"; return; }
-		
 	}
-	//HIDE
-	else if (my_action=='hide')
-	{
-		//hide step-by-step
-		var PlusOrMinus = -1;
-		bckg.style.visibility='hidden';
-		ppdiv.style.visibility = 'hidden';
-		var counte = ActAMOUNT/1;	//start from FULL and goes to HALF
-		
-		//if enabled HIDE_INSTANTLY
+	else if (my_action=='hide')	{
+		//1)HIDE SLOWLY
+		var PlusOrMinus = -1;bckg.style.visibility='hidden';ppdiv.style.visibility = 'hidden';		var counte = ActAMOUNT/1;			
+		//2)HIDE INSTANTLY
 		if (HIDE_INSTANTLY) {ppdiv.style.opacity = '0'; ppdiv.style.display = "none"; return; }
 	}
 	
-	setInterval(function()	{ 
+	setInterval(function()	
+	{ 
 		counte = counte + 1*PlusOrMinus;  //Goes upper or lower
 		if ( counte >= 0 && counte <= ActAMOUNT )
-			{
-			var opacitRATIO		= counte/ActAMOUNT;
-			var zoomRATIO		= counte/ActAMOUNT;
-				
-			//While hiding -  if zoomed ratio goes below minimum, then finish
-			if ( my_action=='hide' && zoomRATIO  <  MINIMUM_ZOOMED_SIZE){ ppdiv.style.display = "none"; return;}
-			
-			ppdiv.setAttribute('style', 'visibility:visible; opacity:'+opacitRATIO+'; transform: scale('+zoomRATIO+');-webkit-transform: scale('+zoomRATIO+'); -moz-transform: scale('+zoomRATIO +'); -ms-transform: scale('+zoomRATIO+'); -o-transform: scale('+zoomRATIO+');');
-			}	
-		},
-				movement_interval );
-
+		{
+			var opacitRATIO		= counte/ActAMOUNT;		var zoomRATIO		= counte/ActAMOUNT;
+			ppdiv.setAttribute('style', 	'opacity:'+opacitRATIO+'; transform: scale('+zoomRATIO+');-webkit-transform: scale('+zoomRATIO+'); -moz-transform: scale('+zoomRATIO +'); -ms-transform: scale('+zoomRATIO+'); -o-transform: scale('+zoomRATIO+');');
+			//(While hiding)if zoomed ratio goes below minimum, then finish
+			if ( my_action=='hide' && zoomRATIO  <  2/3){ ppdiv.style.display = "none"; return;}
+		}	
+	},
+			movement_interval );
 }
-
 </script>	
 	
 	
