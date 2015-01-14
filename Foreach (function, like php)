@@ -1,0 +1,2 @@
+var obj = ["a", "b", "c"];
+var output=''; for (var i = 0; i< obj.length; ++i) { output = output + obj[i];} alert(output);
