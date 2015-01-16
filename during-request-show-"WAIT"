@@ -1,4 +1,4 @@
-to SHOW/HIDE "Please, Wait.." loading window, use functions SHOW_waiting();  and  HIDE_waiting();
+*** to SHOW/HIDE "Please, Wait.." loading window, use functions SHOW_waiting();  and  HIDE_waiting();
 
 <script type="text/javascript">
 function SHOW_waiting(){
