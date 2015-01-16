@@ -1,11 +1,12 @@
-NOTICE:  in the below function, there are included "SHOW_waiting" function( during request, there you will see "PLEASE WAIT" message). For that, at first, you MUST include these  functions into your file.. :  https://github.com/tazotodua/useful-javascript/blob/master/during-request-show-%22WAIT%22
+NOTICE: Please, include "SHOW_waiting" function ( from https://github.com/tazotodua/useful-javascript/blob/master/during-request-show-%22WAIT%22 )
+so, during request, you will see "PLEASE WAIT" message.
 
 
 
 =============================================================================================================
 ===============================METHOD 1: POST or GET request (without Jquery) ===============================
 =============================================================================================================
-USAGE:		myRequest_1("d=kap&e=po", "myInfo.php","POST", "alert('Hi,completed');" );
+USAGE:		myRequest_1("d=kap&e=po", "myInfo.php","POST", "alert('Hi,completed' + responseee );" );
 	
 <script type="text/javascript">
 var responseee;
