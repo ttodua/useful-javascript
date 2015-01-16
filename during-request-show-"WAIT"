@@ -1,6 +1,6 @@
 to SHOW/HIDE "Please, Wait.." loading window, use functions SHOW_waiting();  and  HIDE_waiting();
 
-==========CODE===========
+<script type="text/javascript">
 function SHOW_waiting(){
 	var innerDiv = document.createElement('div'); innerDiv.id = 'my_waiting_box';
 	innerDiv.innerHTML= 
@@ -19,3 +19,4 @@ function SHOW_waiting(){
 function HIDE_waiting(id){ 
 	var DIIV = document.getElementById('my_waiting_box');DIIV.parentNode.removeChild(DIIV); 
 }
+</script>
