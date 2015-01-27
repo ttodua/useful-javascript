@@ -20,7 +20,7 @@ function show_my_popup(contentt){
 	var randm_id=Math.floor((Math.random()*100000000));
 	//show black window
 	var innerDiv = document.createElement('div'); innerDiv.id = "black_backgr_" +randm_id;
-	innerDiv.setAttribute("style", 'background: black;height: 1000px;left: 0px;opacity: 0.9;position: fixed;top: 0px;width: 100%;z-index: 1000;');
+	innerDiv.setAttribute("style", 'background:black; height:1000px; left:0px; opacity:0.9; position:fixed; top:0px; width:100%; z-index:1000;');
 	var BODYYY = document.body;	BODYYY.insertBefore(innerDiv, BODYYY.childNodes[0]);
 	
 	//create window
