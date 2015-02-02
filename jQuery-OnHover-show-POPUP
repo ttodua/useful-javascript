@@ -11,7 +11,8 @@
 	var moveDown = 10;
 	
 	$('#MyTrigger').hover(function(e) {
-	  $('body').append('<span id="MyAudDownPop">Your message hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee </span>'); //create element manually
+	  $('#MyTrigger').click(function(e) { e.preventDefault(); }); //disable Default Click action
+	  $('body').append('<span id="MyAudDownPop">Your messageeeeeeeeee </span>'); //create element manually
 	  
 	  $('#MyAudDownPop').show();
 	  $('#MyAudDownPop').css({'top': e.pageY + moveDown, 'left': e.pageX + moveLeft});
