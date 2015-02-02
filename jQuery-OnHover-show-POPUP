@@ -6,7 +6,7 @@
 #MyAudDownPop{display:none; position:absolute; width:280px; padding:10px; background:#eeeeee; color:#000000; border:1px solid; font-size:90%;}
 </style>
 <script type="text/javascript">
-  $(function() {
+  function MyHintDispp() {
 	var moveLeft = 20;
 	var moveDown = 10;
 	
@@ -23,7 +23,8 @@
 	
 	$('#MyTrigger').mousemove(function(e){ $("#MyAudDownPop").css({'top' :e.pageY + moveDown, 'left':e.pageX + moveLeft});});
 	
-  });
+  };
+  $(function() { MyHintDispp(); }); //Trigger After Jquery is loaded
 </script>
 					
 			
