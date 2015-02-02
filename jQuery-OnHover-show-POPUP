@@ -24,7 +24,7 @@
 	$('#MyTrigger').mousemove(function(e){ $("#MyAudDownPop").css({'top' :e.pageY + moveDown, 'left':e.pageX + moveLeft});});
 	
   };
-  $(function() { MyHintDispp(); }); //Trigger After Jquery is loaded
+  $(function() { MyHintDispp(); }); //Trigger After Jquery(+elements) is loaded
 </script>
 					
 			
