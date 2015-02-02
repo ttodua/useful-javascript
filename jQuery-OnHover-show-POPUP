@@ -1,26 +1,28 @@
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" ></script>
-<style type="text/css">#MyPopup{display:none; position:absolute; width:280px; padding:10px; background:#eeeeee; color:#000000; border:1px solid; font-size:90%;}</style>
+<a href="#" id="MyTrigger">Hover on this link</a>.
 
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" ></script>
+<style type="text/css">
+#MyAudDownPop{display:none; position:absolute; width:280px; padding:10px; background:#eeeeee; color:#000000; border:1px solid; font-size:90%;}
+</style>
 <script type="text/javascript">
-//another type - http://www.sundoginteractive.com/sunblog/posts/jquery-hover-box
-      $(function() {
-        var moveLeft = 20;
-        var moveDown = 10;
-        
-        $('#MyTrigger').hover(function(e) {
-          $('#MyPopup').show();
-          //.css('top', e.pageY + moveDown)
-          //.css('left', e.pageX + moveLeft)
-          //.appendTo('body');
-        }, function() { $('#MyPopup').hide(); });
-        
-        $('#MyTrigger').mousemove(function(e) {  $("div#pop-up").css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft); });
-        
-      });
-    </script>
-	<div id="container">
-		<a href="#" id="MyTrigger">Hover on this link</a>.
-		<div id="MyPopup">
-		  This div only appears when the link is hovered over. Otherwise  it is hidden from view.
-		</div>
-	</div>
+  $(function() {
+	var moveLeft = 20;
+	var moveDown = 10;
+	
+	$('#MyTrigger').hover(function(e) {
+	  $('body').append('<span id="MyAudDownPop">Your message hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee </span>'); //create element manually
+	  
+	  $('#MyAudDownPop').show();
+	  $('#MyAudDownPop').css({'top': e.pageY + moveDown, 'left': e.pageX + moveLeft});
+	}, function() { 
+		//$('#MyAudDownPop').hide(); 
+		$('#MyAudDownPop').remove(); 
+	});
+	
+	$('#MyTrigger').mousemove(function(e){ $("#MyAudDownPop").css({'top' :e.pageY + moveDown, 'left':e.pageX + moveLeft});});
+	
+  });
+</script>
+					
+			
