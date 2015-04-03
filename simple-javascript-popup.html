@@ -11,9 +11,11 @@
 <!--  ------------------------- -->
 <!--  ------------------------- -->
 <!--  ------------------------- -->
-<a href="javascript:show_my_popup(  'Hello, simple message here'                    );">1)Message is got directly</a> (cant use full formatting)
-<br/>
-<a href="javascript:show_my_popup(   document.getElementById('mymessg').innerHTML    );">2)Message is got from DIV</a> (supports full formatting)
+<a href="javascript:show_my_popup('Hello, simple message here');"> 1)Message is got directly</a> (cant use full formatting)<br/>
+<a href="javascript:show_my_popup('#mymessg');">                   2)Message is got from ELEMENT</a> (supports full formatting)
+   <div style="display:none;">
+     <div id="mymessg" style="color:red;">This is a styled div! </br><span style='color:blue'>And inside it,here is a styled span</span></div>
+   </div>
 
 <script type="text/javascript">
 //==============================================     simple POPUP   ==============================================
@@ -32,10 +34,6 @@ function pop_hide(RandomIDD)  { var x=document.getElementById("black_backgr_"+Ra
 //==============================================    #END#   simple POPUP     ==============================================	
 </script>
 
-<div id="mymessg"  class="My_TARGET_Hiddens" style="display:none;"> <!-- actually, display:none is not needed, because in the below script,we can use "hide_popuping" function automatically -->
-	<div style='color:red;'>This is a styled div! </br><span style='color:blue'>And inside it,here is a styled span</span></div>
-</div>
-
 
 
 
@@ -50,12 +48,9 @@ function pop_hide(RandomIDD)  { var x=document.getElementById("black_backgr_"+Ra
 
 
 <script type="text/javascript">
-//all divs, which has a classname "My_TARGET_Hiddens", will be automatically hidden on page load...
-window.onload = function(){ hide_popuping_divs("My_TARGET_Hiddens"); };
-function hide_popuping_divs(classnameee)
-{
-	var elmnts = document.getElementsByClassName(classnameee); var index;
-	for (index = 0; index < elmnts.length; ++index) {
+//To hide(DISPLAY:NONE) all divs, which has       class="My_TARGET_Hiddens"
+window.onload = function(){ hide_popuping_divs("My_TARGET_Hiddens"); }; function hide_popuping_divs(classnameee){
+	var elmnts = document.getElementsByClassName(classnameee); for (var index = 0; index < elmnts.length; ++index) {
 		elmnts[index].style.display= "none";	//elmnts[index].className = elmnts[index].className + " my_css_hide_class";
 	}
 }	
