@@ -4,7 +4,7 @@
 function SHOW_waiting(){
 	var innerDiv = document.createElement('div'); innerDiv.id = 'my_waiting_box';
 	innerDiv.innerHTML= 
-	'<div style="background-color:black; color:white; height:1000px; left:0px; opacity:0.9; position:fixed; top:0px; width:100%; z-index:1007;" id="ppshadow">' +
+	'<div style="background-color:black; color:white; height:4000px; left:0px; opacity:0.9; position:fixed; top:0px; width:100%; z-index:1007;" id="ppshadow">' +
 		'<div style="position:absolute; top:200px;left:49%;  z-index: 1008;" id="ppload"> ' +
 			'<div style="color:white;position:relative;left:100px;"> (to close automatically, you can use <a href="javascript:HIDE_waiting();"> HIDE_waiting();</a> command)</div><br/>'+
 			'<span style="color:white;font-size:24px;"> LOADING...</span><br/>'+
