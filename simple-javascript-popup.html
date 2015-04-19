@@ -1,6 +1,15 @@
 <!-- https://github.com/tazotodua/useful-javascript/ -->
 
 
+
+
+
+
+
+
+
+
+
 			<h1>1) Simplest Popups:</h1>
 <!--  ------------------------- -->
 <!--  ------------------------- -->
@@ -35,33 +44,15 @@ function pop_hide(RandomIDD)  { var x=document.getElementById("black_backgr_"+Ra
 </script>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-<script type="text/javascript">
-//To hide(DISPLAY:NONE) all divs, which has       class="My_TARGET_Hiddens"
-window.onload = function(){ hide_popuping_divs("My_TARGET_Hiddens"); }; function hide_popuping_divs(classnameee){
-	var elmnts = document.getElementsByClassName(classnameee); for (var index = 0; index < elmnts.length; ++index) {
-		elmnts[index].style.display= "none";	//elmnts[index].className = elmnts[index].className + " my_css_hide_class";
-	}
-}	
-</script>
-
-
 <br/><br/>
-(p.s. to use special characters in simple popup, use HTML entities (<a href="http://dev.w3.org/html5/html-author/charref">1</a> or <a href="http://www.elizabethcastro.com/html/extras/entities.html">2</a>)
-
-
-
+p.s. 
+<br/>1) to use special characters in simple popup, use HTML entities (<a href="http://dev.w3.org/html5/html-author/charref">1</a> or <a href="http://www.elizabethcastro.com/html/extras/entities.html">2</a>)
+<br/>2) If you wish (in your custom projects) to only make Bacgkround black, use these functions: <b>SHOW_blackGROUND()</b> and <b>HIDE_blackGROUND()</b>
+<script type="text/javascript">
+//Separate functions, BLACKen background
+	function SHOW_blackGROUND(){ var innerDiv = document.createElement('div'); innerDiv.id = "black_backgr_"+randm_id;   innerDiv.setAttribute("style", 'background:black; height:5000px; left:0px; opacity:0.9; position:fixed; top:0px; width:100%; z-index:9503;'); document.body.insertBefore(innerDiv, document.body.childNodes[0]); }
+	function HIDE_blackGROUND(){ var DIIV = document.getElementById('my_black_bck_123'); DIIV.parentNode.removeChild(DIIV); }
+</script>
 
 
 
@@ -169,3 +160,28 @@ function FadeShowHide(IDD , my_action)	{
 <!--  ------------------------- -->
 <a href="javascript:void(0);" onclick="window.open('http://www.youtube.com', 'windowname1', 'width=500, height=300'); return false;">using window.open() method</a>
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ======================some my personal JUNK, not usable for others======================== -->
+
+
+<!-- function, to To hide(DISPLAY:NONE) all divs, which has       class="My_TARGET_Hiddens" -->
+<script type="text/javascript">
+window.onload = function(){ hide_popuping_divs("My_TARGET_Hiddens"); }; function hide_popuping_divs(classnameee){
+	var elmnts = document.getElementsByClassName(classnameee); for (var index = 0; index < elmnts.length; ++index) {
+		elmnts[index].style.display= "none";	//elmnts[index].className = elmnts[index].className + " my_css_hide_class";
+	}
+}	
+</script>
