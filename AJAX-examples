@@ -1,22 +1,19 @@
 NOTICE: Please, include "SHOW_waiting" function ( from https://github.com/tazotodua/useful-javascript/blob/master/during-request-show-%22WAIT%22 )
 so, during request, you will see "PLEASE WAIT" message.
 
-
-
 =============================================================================================================
 ===============================METHOD 1: POST or GET request (without Jquery) ===============================
 =============================================================================================================
-USAGE:		myRequest_1("d=kap&e=po", "myInfo.php","POST", "alert('Hi,completed' + responseee );" );
+USAGE:		myyAjaxRequest("d=kap&e=po", "myInfo.php","POST", "alert('Hi,completed' + responseee );" );
 	
 <script type="text/javascript">
-var responseee;
-function myRequest_1(parameters, url, method, passedFunction){
+//##################### AJAX EXAMPLES  ############## https://github.com/tazotodua/useful-javascript/ ####################
+function myyAjaxRequest(parameters, url, method, passedFunction){
 	method = method.toLowerCase() || "get"; if (method  == "get") {url=url+'?'+parameters+'&MakeRandomValuedLinkToAvoidCache=' + Math.random();}
-	SHOW_waiting();	try{try{var xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");} catch( e ){var xmlhttp=new ActiveXObject("Msxml2.XMLHTTP");}}catch(e){var xmlhttp = new XMLHttpRequest();}
+	if(typeof SHOW_waiting === 'function') {SHOW_waiting();}	try{try{var xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");} catch( e ){var xmlhttp=new ActiveXObject("Msxml2.XMLHTTP");}}catch(e){var xmlhttp = new XMLHttpRequest();}
 	xmlhttp.onreadystatechange=function(){if (xmlhttp.readyState==4){ HIDE_waiting();
 		responseee ="STATE:"+ xmlhttp.readyState + ";\nSTATUS:" + xmlhttp.status +";\nRESPONSED:" +xmlhttp.responseText; 
-		//let's execute our desired function
-		eval(passedFunction); 
+		eval(passedFunction); //execute any codes
 		}
 	}
 	xmlhttp.open(method,url, true); 
@@ -26,29 +23,22 @@ function myRequest_1(parameters, url, method, passedFunction){
 </script>
 
 
-
-
-
 =============================================================================================
-===============================METHOD 2: POST request (Jquery) ==============================
+===============================METHOD 2: POST request (with Jquery) =========================
 =============================================================================================
-USAGE:     myRequest_2("POST","e.php","myParameter1=kap&e=po");
+USAGE:     myRequest_2("myParameter1=kap&e=po", "filee.php", "POST", "alert('Hii,completed' + responseee );");
 	
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript">
-var responseee;
-function myRequest_2(method,target,parameters){ SHOW_waiting();
+//##################### AJAX EXAMPLES  ############## https://github.com/tazotodua/useful-javascript/ ####################
+function myRequest_2(parameters,target,method, passedFunction){ SHOW_waiting();
 	$.post(target, parameters ,
 		function(data,status){ HIDE_waiting();
 			if (status == "success") {
-				responseee="\n\nRESPONSE:\n" + data;  alert(responseee);
+				responseee="\n\nRESPONSE:\n" + data;  eval(passedFunction); //execute any codes
 				/* if you want get serialized array from php, then:
-				1) in php, use this:
-				echo json_encode(  array('myname'=>'Frank', 'surname'=>'Klobert')    );
-				
-				2) parse with this:
-				arrayed = $.parseJSON(data); var output=''; for (property in arrayed) {output += property + ": " + arrayed[property]+";\n ";}
-				alert(output);
+				1) in php, use this:        echo json_encode(  array('myname'=>'Frank', 'surname'=>'Klobert')    );
+				2) parse with this:        arrayed = $.parseJSON(data); var z=''; for (property in arrayed) {z += property+": "+arrayed[property]+";\n ";}        alert(z);
 				*/
 			}
 		})
@@ -57,7 +47,6 @@ function myRequest_2(method,target,parameters){ SHOW_waiting();
 
 
 
-================================================================================================
 =====================================           OTHER NOTES           ==========================
 ================================================================================================
 ***p.s. instead of manually typing ("myParameter1=kap&e=po"), you can get all fieldnames and their values directly from a FORM: 
