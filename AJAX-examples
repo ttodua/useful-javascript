@@ -14,7 +14,7 @@ function myyAjaxRequest(parameters, url, method, passedFunction){
 	xmlhttp.onreadystatechange=function(){if (xmlhttp.readyState==4){ if(typeof HIDE_waiting === 'function') {HIDE_waiting();} responseee ="STATE:"+ xmlhttp.readyState + ";\nSTATUS:" + xmlhttp.status +";\nRESPONSED:" +xmlhttp.responseText; 
 		eval(passedFunction); //execute any codes
 		}
-	} xmlhttp.open(method,url, true); 
+	}; xmlhttp.open(method,url, true); 
 	if (method  == "post"){xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");xmlhttp.send(parameters);}
 	else if (method  == "get"){xmlhttp.send(null);}
 }
