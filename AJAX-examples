@@ -11,15 +11,14 @@ USAGE:		myyAjaxRequest("d=kap&e=po", "myInfo.php","POST", "alert('Hi,completed' 
 function myyAjaxRequest(parameters, url, method, passedFunction){
 	method = method.toLowerCase() || "get"; if (method  == "get") {url=url+'?'+parameters+'&MakeRandomValuedLinkToAvoidCache=' + Math.random();}
 	if(typeof SHOW_waiting === 'function') {SHOW_waiting();}	try{try{var xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");} catch( e ){var xmlhttp=new ActiveXObject("Msxml2.XMLHTTP");}}catch(e){var xmlhttp = new XMLHttpRequest();}
-	xmlhttp.onreadystatechange=function(){if (xmlhttp.readyState==4){ HIDE_waiting();
-		responseee ="STATE:"+ xmlhttp.readyState + ";\nSTATUS:" + xmlhttp.status +";\nRESPONSED:" +xmlhttp.responseText; 
+	xmlhttp.onreadystatechange=function(){if (xmlhttp.readyState==4){ if(typeof HIDE_waiting === 'function') {HIDE_waiting();} responseee ="STATE:"+ xmlhttp.readyState + ";\nSTATUS:" + xmlhttp.status +";\nRESPONSED:" +xmlhttp.responseText; 
 		eval(passedFunction); //execute any codes
 		}
-	}
-	xmlhttp.open(method,url, true); 
+	} xmlhttp.open(method,url, true); 
 	if (method  == "post"){xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");xmlhttp.send(parameters);}
 	else if (method  == "get"){xmlhttp.send(null);}
 }
+//###################################################################################
 </script>
 
 
