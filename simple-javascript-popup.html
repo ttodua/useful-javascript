@@ -28,26 +28,26 @@
    
 
 <script type="text/javascript">
-// ######################## simple POPUP  ############################# https://github.com/tazotodua/useful-javascript/ ###############
-function show_my_popup(TEXTorID){   
-		//=========if  ID(#SOMETHING)  or   CLASSNAME(.SOMETHING) 
+//######################## simple POPUP  ############################# https://github.com/tazotodua/useful-javascript/ ###############
+function show_my_popup(TEXTorID){     //TEXT,#ID,.CLASSNAME
 		TEXTorID=TEXTorID.trim(); var FirstChar= TEXTorID.charAt(0); var eName = TEXTorID.substr(1); if ('#'==FirstChar || '.'==FirstChar){	if('#'==FirstChar){var x=document.getElementById(eName);} else{var x=document.getElementsByClassName(eName)[0];}} else { var x=document.createElement('div');x.innerHTML=TEXTorID;} var randm_id=Math.floor((Math.random()*100000000));
 	var DivAA = document.createElement('div'); DivAA.id = "blkBackgr_"+randm_id; DivAA.className = "MyJsBackg";   DivAA.setAttribute("style", 'background:black; height:5000px; left:0px; opacity:0.9; position:fixed; top:0px; width:100%; z-index:9503;'); document.body.insertBefore(DivAA, document.body.childNodes[0]);
 	var DivBB = document.createElement('div'); DivBB.id = 'popupp_'+randm_id; DivBB.className = "MyJsPopup"; DivBB.setAttribute("style",'background-color:white; border:6px solid white; border-radius:10px; display:block; min-height:100px; min-width:350px; overflow:auto; max-height:80%; max-width:92%; padding:15px; position:fixed; text-align:center; top:25%; left:50%; transform:translate(-50%, 0); z-index:9504;'); 	DivBB.innerHTML = '<div style="background-color:#C0BCBF; border-radius:55px; padding:5px; font-family:arial; float:right; font-weight:700; margin:-15px -10px 0px 0px;"><a href="javascript:pop_hide('+randm_id+');" style="display:block;margin:-5px 0 0 0;font-size:1.6em;">x</a></div>'; document.body.insertBefore(DivBB, document.body.childNodes[0]);z=x.cloneNode(true);DivBB.appendChild(z); if(z.style.display=="none"){z.style.display="block";}
 }
 function pop_hide(RandomIDD)  { var x=document.getElementById("blkBackgr_"+RandomIDD); x.parentNode.removeChild(x);      var x=document.getElementById('popupp_'+RandomIDD); x.parentNode.removeChild(x); }
-//==============================================    #END#   simple POPUP     ==============================================			
+//###################################################################################	
 </script>
 
 
-<br/><br/>
-p.s. 
+<br/><br/> p.s. 
 <br/>1) to use special characters in simple popup, use HTML entities (<a href="http://dev.w3.org/html5/html-author/charref">1</a> or <a href="http://www.elizabethcastro.com/html/extras/entities.html">2</a>)
 <br/>2) If you wish (in your custom projects) to only make Bacgkround black, use these functions: <b>SHOW_blackGROUND()</b> and <b>HIDE_blackGROUND()</b>
+
 <script type="text/javascript">
-//Separate functions, BLACKen background (NOTE: on your overshown element, use at least: z-index:9600 )
-	function SHOW_blackGROUND()  { var AAADIV = document.createElement('div'); AAADIV.id = "my_black_bck_123";  var stl='background:black; height:5000px; left:0px; opacity:0.9; position:fixed; top:0px; width:100%; z-index:9503;';  AAADIV.setAttribute("style", stl );   	if (mybodyyy = document.body)	{mybodyyy.insertBefore(AAADIV, mybodyyy.childNodes[0]);}  else {document.write('<div style="'+stl+'"></div>');}	}
-	function REMOVE_blackGROUND(){ var AAADIV = document.getElementById('my_black_bck_123'); AAADIV.parentNode.removeChild(AAADIV); }
+//######################## separate BLACKening background  #################(NOTE: on your over element, use z-index:9600 ) ###############
+function SHOW_blackGROUND(){ var AAADIV = document.createElement('div'); AAADIV.id = "my_black_bck_123";  var stl='background:black; height:5000px; left:0px; opacity:0.9; position:fixed; top:0px; width:100%; z-index:9503;';  AAADIV.setAttribute("style", stl ); if (mybodyyy = document.body)  {mybodyyy.insertBefore(AAADIV, mybodyyy.childNodes[0]);}   else                           {document.write('<div style="'+stl+'"></div>');}}
+function REMOVE_blackGROUND(){ var AAADIV = document.getElementById('my_black_bck_123'); AAADIV.parentNode.removeChild(AAADIV); }
+//###################################################################################
 </script>
 
 
