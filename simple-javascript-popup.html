@@ -28,7 +28,7 @@
    
 
 <script type="text/javascript">
-//==============================================     simple POPUP   ==============================================
+// ######################### simple POPUP  ############################## https://github.com/tazotodua/useful-javascript/ ################
 function show_my_popup(TEXTorID){   
 		//=========if  ID(#SOMETHING)  or   CLASSNAME(.SOMETHING) 
 		TEXTorID=TEXTorID.trim(); var FirstChar= TEXTorID.charAt(0); var eName = TEXTorID.substr(1); if ('#'==FirstChar || '.'==FirstChar){	if('#'==FirstChar){var x=document.getElementById(eName);} else{var x=document.getElementsByClassName(eName)[0];}} else { var x=document.createElement('div');x.innerHTML=TEXTorID;} var randm_id=Math.floor((Math.random()*100000000));
