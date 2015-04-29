@@ -18,7 +18,7 @@ function myyAjaxRequest(parameters, url, method, YOUR_PASSED_CODES){
 	if (method  == "post"){xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");xmlhttp.send(parameters);}
 	else if (method  == "get"){xmlhttp.send(null);}
 }
-//###################################################################################
+//########################################################################################################################
 </script>
 
 
