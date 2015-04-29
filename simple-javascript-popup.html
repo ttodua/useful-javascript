@@ -29,13 +29,13 @@
 
 <script type="text/javascript">
 //######################## simple POPUP  ############################# https://github.com/tazotodua/useful-javascript/ ###############
-function show_my_popup(TEXTorID){     //TEXT,#ID,.CLASSNAME
+function show_my_popup(TEXTorID){
 		TEXTorID=TEXTorID.trim(); var FirstChar= TEXTorID.charAt(0); var eName = TEXTorID.substr(1); if ('#'==FirstChar || '.'==FirstChar){	if('#'==FirstChar){var x=document.getElementById(eName);} else{var x=document.getElementsByClassName(eName)[0];}} else { var x=document.createElement('div');x.innerHTML=TEXTorID;} var randm_id=Math.floor((Math.random()*100000000));
-	var DivAA = document.createElement('div'); DivAA.id = "blkBackgr_"+randm_id; DivAA.className = "MyJsBackg";   DivAA.setAttribute("style", 'background:black; height:5000px; left:0px; opacity:0.9; position:fixed; top:0px; width:100%; z-index:9503;'); document.body.insertBefore(DivAA, document.body.childNodes[0]);
-	var DivBB = document.createElement('div'); DivBB.id = 'popupp_'+randm_id; DivBB.className = "MyJsPopup"; DivBB.setAttribute("style",'background-color:white; border:6px solid white; border-radius:10px; display:block; min-height:100px; min-width:350px; overflow:auto; max-height:80%; max-width:92%; padding:15px; position:fixed; text-align:center; top:25%; left:50%; transform:translate(-50%, 0); z-index:9504;'); 	DivBB.innerHTML = '<div style="background-color:#C0BCBF; border-radius:55px; padding:5px; font-family:arial; float:right; font-weight:700; margin:-15px -10px 0px 0px;"><a href="javascript:pop_hide('+randm_id+');" style="display:block;margin:-5px 0 0 0;font-size:1.6em;">x</a></div>'; document.body.insertBefore(DivBB, document.body.childNodes[0]);z=x.cloneNode(true);DivBB.appendChild(z); if(z.style.display=="none"){z.style.display="block";}
+	var DivAA = document.createElement('div');    DivAA.id = "blkBackgr_"+randm_id;  DivAA.className = "MyJsBackg";   DivAA.setAttribute("style", 'background:black; height:5000px; left:0px; opacity:0.9; position:fixed; top:0px; width:100%; z-index:9599;'); document.body.appendChild(DivAA);
+	var DivBB = document.createElement('div');    DivBB.id = 'popupp_'+randm_id;     DivBB.className = "MyJsPopup";   DivBB.setAttribute("style",'background-color:white; border:6px solid white; border-radius:10px; display:block; min-height:100px; min-width:350px; overflow:auto; max-height:80%; max-width:92%; padding:15px; position:fixed; text-align:center; top:25%; left:50%; transform:translate(-50%, 0); z-index:9599;'); 	DivBB.innerHTML = '<div style="background-color:#C0BCBF; border-radius:55px; padding:5px; font-family:arial; float:right; font-weight:700; margin:-15px -10px 0px 0px;"><a href="javascript:pop_hide('+randm_id+');" style="display:block;margin:-5px 0 0 0;font-size:1.6em;">x</a></div>'; document.body.appendChild(DivBB);z=x.cloneNode(true);DivBB.appendChild(z); if(z.style.display=="none"){z.style.display="block";}
 }
 function pop_hide(RandomIDD)  { var x=document.getElementById("blkBackgr_"+RandomIDD); x.parentNode.removeChild(x);      var x=document.getElementById('popupp_'+RandomIDD); x.parentNode.removeChild(x); }
-//###################################################################################	
+//###################################################################################
 </script>
 
 
@@ -73,57 +73,38 @@ function REMOVE_blackGROUND(){ var AAADIV = document.getElementById('my_black_bc
 <!--  ------------------------- -->
 <!--  ------------------------- -->
 
-<a href="javascript:FadeShowHide('mydiiv', 'show'); event.preventDefault();">1) Show FADED POPUP</a>
+<a href="javascript:FadeShowHide('.mydiiv', 'show');">1) Show FADED POPUP</a>
+
 
 <script type="text/javascript">
-var HIDE_INSTANTLY = true;
-var SHOW_INSTANTLY = false;
-var bckg = document.createElement('div'); bckg.setAttribute('id','black_backgrounddd');bckg.style='z-index:9254; visibility:hidden; background:black;	height:3000px; width:4000px; left:-1000px; opacity:0.8;	position:fixed;  top:-600px; transition:all 0.2s ease-out;-webkit-transition:opacity 0.2s; transition:opacity 0.2s; -moz-transition:all 0.2s ease-out; -o-transition:all 0.2s ease-out;';	document.body.appendChild(bckg);
-
-function FadeShowHide(IDD , my_action)	{	
-	var starttted=true;
-	var ppdiv= document.getElementById(IDD);
-	my_action = my_action || false;
-	var ActAMOUNT	=	20;			//	amount of actions	
+function FadeShowHide(TEXTorID , my_action)	{
+	var ActAMOUNT	=	20;		//	amount of actions	
 	var movement_interval = 6; 		//	1000/ActAMOUNT = DURATION of each step(miliseconds)
+	var HIDE_INSTANTLY_ENABLED = false;
+	var SHOW_INSTANTLY_ENABLED = false;
+
+	//Make Background Black
+    if ('undefined'== typeof MyFadBackg){MyFadBackg = document.createElement('div');   MyFadBackg.id = "MyFADBackg";   MyFadBackg.setAttribute("style", 'z-index:9254; visibility:hidden; background:black;	height:3000px; width:4000px; left:-1000px; opacity:0.8;	position:fixed;  top:-600px; transition:all 0.2s ease-out;-webkit-transition:opacity 0.2s; transition:opacity 0.2s; -moz-transition:all 0.2s ease-out; -o-transition:all 0.2s ease-out;'); document.body.appendChild(MyFadBackg);}
+
+	var FirstChar= TEXTorID.trim().charAt(0); var eName=TEXTorID.substr(1);  var x=  ('#'==FirstChar) ? document.getElementById(eName): document.getElementsByClassName(eName)[0];
+	if      (my_action=='show') { if (SHOW_INSTANTLY_ENABLED) {x.style.opacity = '1'; x.style.visibility = "visible"; return; }
+		var PlusOrMinus = 1; MyFadBackg.style.visibility='visible'; x.style.visibility = 'visible';	var counte = ActAMOUNT*2 /3;   }
+	else if (my_action=='hide')	{ if (HIDE_INSTANTLY_ENABLED) {x.style.opacity = '0'; x.style.visibility = "hidden"; return; }
+		var PlusOrMinus = -1;MyFadBackg.style.visibility='hidden';  x.style.visibility = 'hidden';		var counte = ActAMOUNT/1;  }
 	
-	if (my_action == 'show')		{
-		//1)SHOW SLOWLY
-		var PlusOrMinus = 1; bckg.style.visibility='visible'; ppdiv.style.visibility = 'visible';	var counte = ActAMOUNT*2 /3;
-		//2)SHOW INSTANTLY
-		if (SHOW_INSTANTLY) {ppdiv.style.opacity = '1';		 ppdiv.style.display = "block"; return; }
-	}
-	else if (my_action=='hide')	{
-		//1)HIDE SLOWLY
-		var PlusOrMinus = -1;bckg.style.visibility='hidden';ppdiv.style.visibility = 'hidden';		var counte = ActAMOUNT/1;			
-		//2)HIDE INSTANTLY
-		if (HIDE_INSTANTLY) {ppdiv.style.opacity = '0'; ppdiv.style.display = "none"; return; }
-	}
-	
-	setInterval(function()	
-	{ 
-		counte = counte + 1*PlusOrMinus;  //Goes upper or lower
-		if ( counte >= 0 && counte <= ActAMOUNT )
-		{
-			var opacitRATIO		= counte/ActAMOUNT;		var zoomRATIO		= counte/ActAMOUNT;
-			ppdiv.setAttribute('style', 	'opacity:'+opacitRATIO+'; transform: scale('+zoomRATIO+');-webkit-transform: scale('+zoomRATIO+'); -moz-transform: scale('+zoomRATIO +'); -ms-transform: scale('+zoomRATIO+'); -o-transform: scale('+zoomRATIO+');');
-			//(While hiding)if zoomed ratio goes below minimum, then finish
-			if ( my_action=='hide' && zoomRATIO  <  2/3){ ppdiv.style.display = "none"; return;}
-		}	
-	},
-			movement_interval );
+	setTimeout(function looooperrr(){  counte = counte + 1*PlusOrMinus;  //Increases or decreases
+		if ( counte >= 0 && counte <= ActAMOUNT )	{
+			var opacitRATIO = counte/ActAMOUNT;		var zoomRATIO		= counte/ActAMOUNT;
+			x.style.opacity =opacitRATIO; x.style.transform = 'scale('+zoomRATIO+')'; x.style.webkitTransform='scale('+zoomRATIO+')'; x.style.MozTransform='scale('+zoomRATIO +')';  x.style.msTransform='scale('+zoomRATIO+')';  x.style.OTransform = 'scale('+zoomRATIO+')';
+			if ( my_action=='hide' && zoomRATIO  <  2/3){ x.style.visibility = "hidden"; return;}
+		}	setTimeout(looooperrr,movement_interval);
+	},	movement_interval );
+
 }
 </script>
-<style>
-.fade_my_class{z-index:9255; position:absolute; top:50%; left:40%; opacity:0; height:100px; width:200px;  margin:0 auto;  background:#FFFFFF; box-shadow:0px 1px 10px 0px rgba(0, 0, 0, 0.506); overflow:hidden; padding:10px 10px 10px 10px;  border-radius:3px; color:#555555; display:block;}
-</style>
-<div class="fade_my_class" id="mydiiv" style="visibility:hidden;">
-	<a href="javascript:FadeShowHide('mydiiv', 'hide'); event.preventDefault();" style="float:right;">X</a>
-	<div class="buttns_inside_line">
-	Something here
-	</div>
+<div class="mydiiv" style="visibility:hidden;                  z-index:9255; position:absolute; top:50%; left:40%; opacity:0; height:100px; width:200px;  margin:0 auto;  background:#FFFFFF; box-shadow:0px 1px 10px 0px rgba(0, 0, 0, 0.506); overflow:hidden; padding:10px;  border-radius:3px; color:#555555; ">
+	<div class="buttns_inside_line" style="color:red;">Something hereeeeeeee</div> <a href="javascript:FadeShowHide('.mydiiv', 'hide'); " style="float:right;">X</a>
 </div>
-
 
 
 
@@ -171,13 +152,5 @@ function FadeShowHide(IDD , my_action)	{
 
 
 <!-- ======================some my personal JUNK, not usable for others======================== -->
-
-
 <!-- function, to To hide(DISPLAY:NONE) all divs, which has       class="My_TARGET_Hiddens" -->
-<script type="text/javascript">
-window.onload = function(){ hide_popuping_divs("My_TARGET_Hiddens"); }; function hide_popuping_divs(classnameee){
-	var elmnts = document.getElementsByClassName(classnameee); for (var index = 0; index < elmnts.length; ++index) {
-		elmnts[index].style.display= "none";	//elmnts[index].className = elmnts[index].className + " my_css_hide_class";
-	}
-}	
-</script>
+<script type="text/javascript">window.onload = function(){ hide_popuping_divs("My_TARGET_Hiddens"); }; function hide_popuping_divs(classnameee){ var elmnts = document.getElementsByClassName(classnameee); for (var index = 0; index < elmnts.length; ++index) { elmnts[index].style.display= "none";	}}</script>
