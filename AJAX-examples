@@ -4,7 +4,7 @@ so, during request, you will see "PLEASE WAIT" message.
 =============================================================================================================
 ===============================METHOD 1: POST or GET request (without Jquery) ===============================
 =============================================================================================================
-USAGE:		myyAjaxRequest("d=kap&e=po", "myInfo.php","POST", "alert('Hi,completed' + responseee );" );
+USAGE:		myyAjaxRequest("d=kap&e=po", "myInfo.php","POST", "alert('Hi,completed: ' + responseee );", true );
 	
 <script type="text/javascript">
 //##################### AJAX EXAMPLES  ############## https://github.com/tazotodua/useful-javascript/ ####################
