@@ -1,21 +1,15 @@
+//USAGE:   postForm( {deletecityy:'hihi',  surname: 'blabla'}, 'Are you sure?' , 'http://yoursite.com' , '_blank');
+
 <script type="text/javascript">
-//USAGE:      postForm( {deletecityy:'hihi',  surname: 'blabla'}, 'Are you sure?' , 'http://yoursite.com' , '_blank');
-function postForm(params,ConfirmMessage, path, method, targett) 
-{
+//source: https://github.com/tazotodua/useful-javascript
+function postForm(params,ConfirmMessage, path, method, targett) {
 	if (typeof ConfirmMessage != 'undefined' &&  ConfirmMessage != '') { if(!confirm(ConfirmMessage)){return;}}
-	
-	method	= method || "POST";
-	path   	= path	|| "";
-	targett	= targett || "";
-	var form = document.createElement("form");form.setAttribute("method", method);form.setAttribute("action", path); form.setAttribute("target", targett); 
-	for(var key in params) {
-		if(params.hasOwnProperty(key)) 
-		{
-			var hiddenField = document.createElement("input");	hiddenField.setAttribute("type", "hidden");
-			hiddenField.setAttribute("name", key);				hiddenField.setAttribute("value", params[key]);
-			form.appendChild(hiddenField);
-		}
-	}
-	document.body.appendChild(form); form.submit();
-} //source: https://github.com/tazotodua/useful-javascript
+		method=method || "POST";	path=path || "";    targett=targett || "";
+		var form = document.createElement("form");form.setAttribute("method", method);form.setAttribute("action", path); form.setAttribute("target", targett); 
+		for(var key in params) {
+			if(params.hasOwnProperty(key)) 	{
+				var f = document.createElement("input");f.setAttribute("type", "hidden");f.setAttribute("name", key);f.setAttribute("value", params[key]);form.appendChild(f);
+			}
+		}	document.body.appendChild(form); form.submit();
+} 
 </script>
