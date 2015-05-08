@@ -3,7 +3,7 @@
 <script type="text/javascript">
 //source: https://github.com/tazotodua/useful-javascript
 function postForm(params,ConfirmMessage, path, method, targett) {
-	if (typeof ConfirmMessage != 'undefined' &&  ConfirmMessage != '') { if(!confirm(ConfirmMessage)){return;}}
+	if (typeof ConfirmMessage != 'undefined' &&  ConfirmMessage) { if(!confirm(ConfirmMessage)){return;}}
 		method=method || "POST";	path=path || "";    targett=targett || "";
 		var form = document.createElement("form");form.setAttribute("method", method);form.setAttribute("action", path); form.setAttribute("target", targett); 
 		for(var key in params) {
