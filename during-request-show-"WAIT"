@@ -2,7 +2,7 @@
 
 <script type="text/javascript">
 //############### "PLEASE WAIT" popup   ################ https://github.com/tazotodua/useful-javascript/ ################
-function SHOW_waiting(style){style = style|| 'opacity:0.9;color:grey;'; var DIIV = document.createElement('div'); DIIV.id = 'my_waiting_box';  DIIV.innerHTML=  '<div style="background-color:black; color:white; opacity:0.9;height:4000px; left:0px;  position:fixed; top:0px; width:100%; z-index:1007;'+style+'" id="ppshadow">' + '<div style="position:absolute; top:200px;left:49%; z-index: 1008;" id="ppload"> ' + '<span style="color:grey;font-size:24px;"> LOADING...</span><br/>'+'</div>'+'</div>'; 	var b=document.body;   b.insertBefore(DIIV, b.childNodes[0]);  }
+function SHOW_waiting(style){style = style|| 'opacity:0.9;color:grey;'; var DIIV = document.createElement('div'); DIIV.id = 'my_waiting_box';  DIIV.innerHTML=  '<div style="background-color:black; color:white; opacity:0.9;height:4000px; left:0px;  position:fixed; top:0px; width:100%; z-index:9907;'+style+'" id="ppshadow">' + '<div style="position:absolute; top:200px;left:49%; z-index: 9908;" id="ppload"> ' + '<span style="color:grey;font-size:24px;"> LOADING...</span><br/>'+'</div>'+'</div>'; 	var b=document.body;   b.insertBefore(DIIV, b.childNodes[0]);  }
 function HIDE_waiting(){  var DIIV = document.getElementById('my_waiting_box'); DIIV.parentNode.removeChild(DIIV);  }
 //#######################################################################################################################
 </script>
