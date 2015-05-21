@@ -1,6 +1,5 @@
-/* RESET CSS
- 	WHENEVER you want to integrate element into external site, at first, you'd better to reset the css for your new element, because external site may had defined bad styles for elements globally. p.s. change TARGET_ID with your element's ID 
-*/ 
+RESET CSS - 	WHENEVER you want to integrate element into external site, at first, you'd better to reset the css for your new element, because external site may had defined bad styles for elements globally. p.s. change TARGET_ID with your element's ID 
+
 
 
 
