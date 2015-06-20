@@ -30,9 +30,9 @@ USAGE:     myRequest_2("myParameter1=kap&e=po", "filee.php", "POST", "alert('Hii
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript">
 //##################### AJAX EXAMPLES  ############## https://github.com/tazotodua/useful-javascript/ ####################
-function myRequest_2(parameters,target,method, passedFunction){ SHOW_waiting();
+function myRequest_2(parameters,target,method, passedFunction){ alert('wait 1 sec');
 	$.post(target, parameters ,
-		function(data,status){ HIDE_waiting();
+		function(data,status){ 
 			if (status == "success") {
 				responseee="\n\nRESPONSE:\n" + data;  eval(passedFunction); //execute any codes
 				/* if you want get serialized array from php, then:
