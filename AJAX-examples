@@ -33,7 +33,7 @@ USAGE:     myRequest_2("myParameter1=kap&e=po", "filee.php", "POST", "alert('Hii
 function myRequest_2(parameters,target,method, passedFunction){ alert('wait 1 sec');
 	$.post(target, parameters ,
 		function(data,status){ 
-			if (status == "success") {
+			if (status == "success") { alert("completed!");
 				responseee="\n\nRESPONSE:\n" + data;  eval(passedFunction); //execute any codes
 				/* if you want get serialized array from php, then:
 				1) in php, use this:        echo json_encode(  array('myname'=>'Frank', 'surname'=>'Klobert')    );
