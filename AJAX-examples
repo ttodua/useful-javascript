@@ -4,19 +4,16 @@ so, during request, you will see "PLEASE WAIT" message.
 =============================================================================================================
 ===============================METHOD 1: POST or GET request (without Jquery) ===============================
 =============================================================================================================
-USAGE:		myyAjaxRequest("d=kap&e=po", "myInfo.php","POST", "alert('Hi,completed: ' + responseee );", true );
+USAGE:		myyAjaxRequest("d=kap&e=po",  "http://mysite.com/myInfo.php",  "POST", "alert('Hi,completed: ' + responseee);",   true , "plz,WaitMeeeee");
 	
 <script type="text/javascript">
 //##################### AJAX EXAMPLES  ############## https://github.com/tazotodua/useful-javascript/ ####################
-function myyAjaxRequest(parameters, url, method, YOUR_PASSED_CODES, ShowBlackground){ ShowBlackground= ShowBlackground || false;
-	method = method || "get";method=method.toLowerCase(); url = (url =='') ? window.location.href : url;  if (method  == "get") { url= url + ( (url.indexOf('?') <= -1) ? '?' : '&') +parameters+'&RandomInLinkToAvoidCache=' + Math.random();}
-	if(typeof SHOW_waiting === 'function' && ShowBlackground) {SHOW_waiting();}	try{try{var xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");} catch( e ){var xmlhttp=new ActiveXObject("Msxml2.XMLHTTP");}}catch(e){var xmlhttp = new XMLHttpRequest();}
-	xmlhttp.onreadystatechange=function(){if (xmlhttp.readyState==4){ if(typeof HIDE_waiting === 'function' && ShowBlackground) {HIDE_waiting();}  responseee = xmlhttp.responseText; //xmlhttp.readyState + xmlhttp.status//
-		eval(YOUR_PASSED_CODES); //execute any codes
-		}
-	}; xmlhttp.open(method,url, true); 
-	if (method  == "post"){xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");xmlhttp.send(parameters);}
-	else if (method  == "get"){xmlhttp.send(null);}
+function myyAjaxRequest(parameters, url, method, YOUR_PASSED_CODES, ShowBlackground, YourWaitMessage){ pp_ShowBlackground= ShowBlackground || false;
+  var method= (method || "get").toLowerCase(); var url = (url =='') ? window.location.href : url;  if (method=="get") { url= url + ( (url.indexOf('?') <= -1) ? '?' : '&') +parameters+'&CacheAvoider=' + Math.random();}  
+  if(pp_ShowBlackground) {  var z = document.createElement("div"); z.id = "my_waiting_box_888";  z.innerHTML=  '<div style="background-color:black; color:white; opacity:0.9;height:8000px; left:0px;  position:fixed; top:0px; width:100%; z-index:1007;" id="ppa_shadow"> <div style="position:absolute; top:200px;left:49%; z-index: 1008;" id="ppa_load">'+ ( YourWaitMessage || '<span id="ppa_phrase" style="color:grey;font-size:24px;">LOADING...</span>')+'<br/></div></div>'; document.body.appendChild(z); }
+  try{try{var xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");} catch( e ){var xmlhttp=new ActiveXObject("Msxml2.XMLHTTP");}} catch(e){var xmlhttp = new XMLHttpRequest();}  xmlhttp.onreadystatechange=function(){
+    if (xmlhttp.readyState==4){    if(pp_ShowBlackground) {var x=document.getElementById("my_waiting_box_888"); x.parentNode.removeChild(x);}    responseee = xmlhttp.responseText; eval(YOUR_PASSED_CODES);    }  //xmlhttp.readyState + xmlhttp.status//
+  }; xmlhttp.open(method,url, true);  if (method  == "get"){xmlhttp.send(null);} else if (method  == "post"){xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");xmlhttp.send(parameters);}
 }
 //########################################################################################################################
 </script>
