@@ -118,6 +118,11 @@ function privacy_policy_text_main()
 <br/><p>\
 <br/>By using our Web site, you consent to the collection and use of this information by our website. If we decide to change our privacy policy, we will post those changes on this page and notify users with available electronic forms (like Email), so that you are always aware of what information we collect, how we use it, and under what circumstances we disclose it.\
 <br/></p>\
+<br/><h2>How to view or  delete your cookies</h2>\
+<br/><p>\
+<br/>To delete cookies in your browser:  You can right click your mouse on this page, then select INSPECT, and go to APPLICATION tab, then choose COOKIES and you can see all cookies we use. You can delete them by selecting them and clicking DELETE. Alternatively (especially if you use mobile devices), you can go to browser settings, in Privacy, and clear cookies for this website. \
+<br/>To delete information from our site:  It was stated already above, please refer there.\
+<br/></p>\
 ';
 	}
 
