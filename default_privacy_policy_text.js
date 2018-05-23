@@ -1,5 +1,14 @@
 
 /*
+usage:
+
+<script src="https://rawgit.com/tazotodua/useful-javascript/master/default_privacy_policy_text.js"></script>
+<div id="privacy_policy_text"></div>
+*/
+
+
+
+/*
 
 <div id="privacy_policy_text"></div>
 <script type="text/javascript">
