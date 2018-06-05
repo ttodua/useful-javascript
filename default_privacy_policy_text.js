@@ -268,8 +268,7 @@ Our website is committed to protecting your privacy. We use the information we c
 			var agr_bar_button = document.getElementById("gdpr-agreement-tt");
 			if (agr_bar_button)
 			{
-				agr_bar_button.addEventListener("click", function(){
-					alert("cookie_set");
+				agr_bar_button.addEventListener("click", function(){ 
 					ttLibrary.setCookie("cookie_consent_tt", 1, 365);
 				});
 			}
