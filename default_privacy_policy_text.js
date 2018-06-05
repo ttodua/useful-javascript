@@ -151,4 +151,5 @@ function privacy_policy_text_main()
 
 }
 
-window.onload = privacy_policy_text_main;
+window.addEventListener ? window.addEventListener("load",privacy_policy_text_main,false) : window.attachEvent && window.attachEvent("onload",privacy_policy_text_main);
+ 
