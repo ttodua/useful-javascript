@@ -2,26 +2,21 @@
 /*
 usage:
 
+1) put this whereever you want to output:
+<div id="privacy_policy_text"></div>
+
+2) add this script on the same page:
 <script src="https://rawgit.com/tazotodua/useful-javascript/master/default_privacy_policy_text.js"></script>
-<div id="privacy_policy_text"></div>
-*/
 
+or
 
-
-/*
-
-<div id="privacy_policy_text"></div>
 <script type="text/javascript">
 privacy_policy_text.lang="en";
 var script = document.createElement('script');  
 var host = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-script.src = host + 'localhost/privacy_policy_text.js';  
+script.src = host + 'rawgit.com/tazotodua/useful-javascript/master/default_privacy_policy_text.js';  
 document.head.appendChild(script);
-
-//var host = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-//document.write(unescape("%3Cscript src='" + host + "localhost/privacy_policy_text.js' type='text/javascript'%3E%3C/script%3E"));
 </script>
-
 */
 if (typeof privacy_policy_text == "undefined") {
    var privacy_policy_text= {};
