@@ -11,7 +11,7 @@ usage:
 		lang			: "en",								//optional, comment this line to default to "en"
 		site 			: "www.mysite.com",					//optional, comment this line to default to domain
 		privacy_page_url: "https://mysite.com/privacy-page"	//optional, comment this line to create an auto-link
-		output_to_id	: "elementId"						//optional, comment this line to make full-page
+		output_to_id	: "elementId"						//optional, comment this line to make full-page 
     };
     </script>
     
