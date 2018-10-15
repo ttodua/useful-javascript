@@ -1,67 +1,137 @@
-
 /*
-usage:
 
-1) add this script in the bottom of your site  (alternate to: https://pastebin.com/raw/1LDnvx6f ) :
+######################### usage ##########################
+add this script in the bottom of your site:
 
-    <script src="https://rawgit.com/tazotodua/useful-javascript/master/default_privacy_policy_text.js"></script>
-    <script>
-    // IF YOU WANT, YOU CAN ALSO CUSTOMIZE PARAMETERS
-    var privacy_policy_text_TT= {		
-		lang			: "en",								//optional, comment this line to default to "en"
-		site 			: "www.mysite.com",					//optional, comment this line to default to domain
-		privacy_page_url: "https://mysite.com/privacy-page"	//optional, comment this line to create an auto-link
-		output_to_id	: "elementId"						//optional, comment this line to make full-page 
-    };
-    </script>
-    
-    
-2) In case, you have defined "USE_ID_FOR_OUTPUT" put this whereever you want to output privacy-policy text:
+    <script src="https://rawgit.com/tazotodua/useful-javascript/master/default_privacy_policy_text.js?lang=en"></script>
 
-    <div id="elementId"></div>
+// IF YOU WANT, YOU CAN ALSO CUSTOMIZE PARAMETERS (use them without quotes):
+	lang			[defaults to: "en"]				- you can set the language manually	
+	site 			[defaults to: current domain]	- you can manually set to :  www.yoursite.com
+	privacy_page_url[defaults to: automatic url]	- you can create the url explicitly, like:   yoursite.com/whatever
+	target_id		[defaults to: "gdpr_content_TT"]- set ID to fill the text withing specific <div id="gdpr_content_TT">
+													- set to "false" to use just full-window message instead.
 
+##########################################################					
 */
 
 
 
 
-if (typeof privacy_policy_text_TT == "undefined") {
-   var privacy_policy_text_TT= {};
-}
 
-var privacy_policy_text_TT = 
+// ================================= START HERE =====================================
+privacy_policy_text_TT = 
 {
-	lang		:  privacy_policy_text_TT.hasOwnProperty("lang")  		? privacy_policy_text_TT.lang : "en" ,
-	site 		:  privacy_policy_text_TT.hasOwnProperty("site")  		? privacy_policy_text_TT.site : location.host,
-	//
-	default_query : 'default_privacy_policy_page=show',
-	privacy_page_url	:  privacy_policy_text_TT.hasOwnProperty("privacy_page_url")	? privacy_policy_text_TT.privacy_page_url : './?default_privacy_policy_page=show',
-	
+	init : function(){
+		privacy_policy_text_TT.init_vars();
+		privacy_policy_text_TT.textResults();
+		privacy_policy_text_TT.execute_insert();
+		privacy_policy_text_TT.check_cookies();
+	},
+
+	init_vars : function()
+	{
+		var params =ttLibrary.readSelfParameters();
+		privacy_policy_text_TT.lang				= params.hasOwnProperty("lang")  		? params.lang		: "en";
+		privacy_policy_text_TT.site 			= params.hasOwnProperty("site")  		? params.site		: location.host;
+		privacy_policy_text_TT.target_id		= params.hasOwnProperty("target_id")	? params.target_id	: "gdpr_content_TT";
+		//
+		privacy_policy_text_TT.default_query	= 'default_privacy_policy_page=show';
+		privacy_policy_text_TT.privacy_page_url	=  params.hasOwnProperty("privacy_page_url")? params.privacy_page_url : (location.href.indexOf('?') <0 ? '?' : '&') + 'default_privacy_policy_page=show';
+	},
+
 	capitalizeFirstLetter : function(string)
 	{ 
 		return  string.charAt(0).toUpperCase() + string.slice(1); 
 	},
 
+
+	check_cookies : function()
+	{
+		if ( ! ttLibrary.getCookie("cookie_consent_tt") ) 
+		{ 
+			var css = 
+			'.privacy_policy_text_TT #gdpr_privacy_bar_TT {\
+				position: fixed;\
+				bottom: 0;\
+				left: 0;\
+				background: rgba(0,0,0,0.9);\
+				width: 100%;\
+				color: #fff;\
+				z-index: 9999999;\
+				opacity: 0.95;\
+				font-style: italic;\
+			}\
+			.privacy_policy_text_TT #gdpr_privacy_bar_TT .gdpr_wrapper {\
+				display: flex;\
+				flex-direction: row;\
+				margin: 5px 20px;\
+				justify-content: center;\
+				font-size: 11px;\
+			}\
+			.privacy_policy_text_TT #gdpr_privacy_bar_TT button {\
+				background: #88e000;\
+				padding: 2px 15px;\
+				border-radius: 5px;\
+				cursor: pointer;\
+			}\
+			.privacy_policy_text_TT #gdpr_privacy_bar_TT .gdpr_wrapper div {\
+				margin:0px 10px;\
+			}\
+			.privacy_policy_text_TT #gdpr_privacy_bar_TT a.privacy_policy_learnmore_tt {\
+				color:#9191ea;\
+				font-style:italic;\
+			}\
+			';
+			ttLibrary.insertIntoHead(css);
+			
+			var txt_output  =
+			'<div class="privacy_policy_text_TT">\
+				<div id="gdpr_privacy_bar_TT">\
+					<div class="gdpr_wrapper">\
+						<div class="gdpr-content">' 
+							+ privacy_policy_text_TT.output_bar_Notice +   
+						'</div>\
+						<div class="gdpr_right">\
+							<button id="gdpr_agreement_TT" type="button">' + privacy_policy_text_TT.output_bar_Agree +  '</button>\
+						</div>\
+					</div>\
+				</div>\
+			</div>';
+			
+			txt_output = txt_output.replace("_DEFAULT_A_ATTS_", 'href="' + privacy_policy_text_TT.privacy_page_url + '" target="_blank" class="privacy_policy_learnmore_tt"');
+
+			var newElement = document.createElement("div");
+			newElement.innerHTML = txt_output; 
+			document.body.appendChild(newElement);
+			
+			var agr_bar_button = document.getElementById("gdpr_agreement_TT");
+			if (agr_bar_button)
+			{
+				agr_bar_button.addEventListener("click", function(){ 
+					ttLibrary.setCookie("cookie_consent_tt", 1, 365);
+					document.getElementById("gdpr_privacy_bar_TT").style.display="none";
+				});
+			}
+			
+		}
+	
+	
+	},
+	
+	
+	
 	textResults : function(string) 
 	{ 
-		var lang= privacy_policy_text_TT.lang ;
+		var lang= privacy_policy_text_TT.lang;
 		var website = privacy_policy_text_TT.capitalizeFirstLetter( privacy_policy_text_TT.site  );
-		
-		
-		var output_bar_Notice		= "";
-		var output_bar_LearnMore	= "";
-		var output_bar_Agree		= "";
-		var output_privacy			= "";
 
 		if (lang == "en") 
 		{
-			output_bar_Notice		= 'Our site uses cookies, so using our site means that you accept our privacy policy & terms. You can <a _DEFAULT_A_ATTS_>learn more</a>.';
-			output_bar_Agree 		= 'I agree';
-			output_privacy = 
-'<style>\
-.privacy_policy_text_TT{ margin: 50px 50px 100px; }\
-</style>\
-<div class="privacy_policy_text_TT">\
+			privacy_policy_text_TT.output_bar_Notice	= 'Our site uses cookies. Using our site means that you accept the privacy policy & terms (<a _DEFAULT_A_ATTS_>learn more</a>).';
+			privacy_policy_text_TT.output_bar_Agree 	= 'I agree';
+			privacy_policy_text_TT.output_privacy		= 
+'<div class="privacy_policy_text_TT">\
 <h1 style="text-align:center;">Privacy Policy</h1>\
 <p>\
 '+website+' (reffered as "our site" or "we") website is structured so that it uses some kind of data collection to identify visitor. Once you choose to provide us personally identifiable information (any information by which you can be identified), you can be assured that it will only be used to support your customer experience with our site. </p>\
@@ -114,13 +184,10 @@ Our website is committed to protecting your privacy. We use the information we c
 		
 		else if (lang == "ge") 
 		{
-			output_bar_Notice		= 'ჩვენი საიტი იყენებს ე.წ. "cookies", შესაბამისად საიტის გამოყენებით თქვენ ეთანხმებით ვებ-საიტის მოხმარებისა და პერსონალური ინფორმაციის გამოყენების წესებს (შეგიძლიათ იხილოთ სრული <a _DEFAULT_A_ATTS_> დოკუმენტაცია აქ</a>).';
-			output_bar_Agree 		= 'გასაგებია';
-			output_privacy = 
-'<style>\
-.privacy_policy_text_TT{ margin: 50px 50px 100px; }\
-</style>\
-<div class="privacy_policy_text_TT">\
+			privacy_policy_text_TT.output_bar_Notice	= 'საიტი იყენებს "cookies"-ებს. საიტის გამოყენებით თქვენ ეთანხმებით აღნიშნული საიტის მოხმარებისა და კონფიდენციალობის წესებს (<a _DEFAULT_A_ATTS_>დამატებითი ცნობები</a>).';
+			privacy_policy_text_TT.output_bar_Agree 	= 'გასაგებია';
+			privacy_policy_text_TT.output_privacy 		= 
+'<div class="privacy_policy_text_TT">\
 <h1 style="text-align:center;">პირადი ინფორმაციის მოხმარებისა და კონფიდენციალურობის წესები</h1>\
 <p>\
 '+website+' (შემდგომში ნახსენები როგორც "ჩვენი საიტი" ან "ჩვენ" ან "საიტი") საიტის მუშაობა გარკვეულწილად ეყრდნობა მომხმარებლებისაგან მიღებულ ინფორმაციას, შესაბამისად საიტი შემომსვლელისაგან აგროვებს გარკვეულ ინფორმაციას. ეს ინფორმაცია მხოლოდამხოლოდ გამოიყენება იმისათვის, რათა საიტი გამართულად და მომხმარებელზე ორიენტირებულად მუშაობდეს. </p>\
@@ -166,32 +233,17 @@ Our website is committed to protecting your privacy. We use the information we c
 </p>\
 </div>\
 ';
-		}		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		privacy_policy_text_TT.output_bar_Notice	= output_bar_Notice; 
-		privacy_policy_text_TT.output_bar_Agree		= output_bar_Agree;
-		privacy_policy_text_TT.output_privacy		= output_privacy;
+		}
 	},
 
 
 	execute_insert : function()
 	{
-		var ID_set = privacy_policy_text_TT.hasOwnProperty("elementID") ? privacy_policy_text_TT.elementID : false;
-
-		if(ID_set) {
-			document.getElementById(ID_set).innerHTML = txt_output;
+		var txt_output = '<style>.privacy_policy_text_TT{ margin: 50px 50px 100px; }</style>' + privacy_policy_text_TT.output_privacy;
+		
+		if ( privacy_policy_text_TT.target_id!="false" && document.getElementById(privacy_policy_text_TT.target_id) ){
+			document.getElementById(privacy_policy_text_TT.target_id).innerHTML = txt_output;
 		}
-		else if ( privacy_policy_text_TT.hasOwnProperty("output_to_id") &&  document.getElementById(privacy_policy_text_TT.output_to_id)){
-			document.getElementById(privacy_policy_text_TT.output_to_id).innerHTML = txt_output;
-		}	
 		//else if	()
 		//{
 			//var newElement = document.createElement("div");
@@ -207,85 +259,12 @@ Our website is committed to protecting your privacy. We use the information we c
 		{
 			if ( ttLibrary.url_contains(privacy_policy_text_TT.default_query) )
 			{
-				document.body.innerHTML = privacy_policy_text_TT.output_privacy;
+				document.body.innerHTML = txt_output;
 			}
 		}
-	},
-	
-	
-	check_cookies : function()
-	{
-		if ( ! ttLibrary.getCookie("cookie_consent_tt") ) 
-		{ 
-			var css = 
-			'.privacy_policy_text_TT .gdpr-privacy-bar {\
-				position: fixed;\
-				bottom: 0;\
-				left: 0;\
-				background: rgba(0,0,0,0.9);\
-				width: 100%;\
-				color: #fff;\
-				z-index: 9999999;\
-			}\
-			.privacy_policy_text_TT  button {\
-				background: #bff100d6;\
-				padding: 5px 20px;\
-				border-radius: 5px;\
-				box-shadow: 0px 0px 5px white;\
-			}\
-			.privacy_policy_text_TT .gdpr-privacy-bar .gdpr-wrapper {\
-			    display: flex;\
-				flex-direction: row;\
-				margin: 10px 20px;\
-				justify-content: center;\
-			}\
-			.privacy_policy_text_TT .gdpr-privacy-bar .gdpr-wrapper div {\
-				margin:0px 10px;\
-			}\
-			';
-			ttLibrary.insertIntoHead(css);
-			
-			var txt_output  =
-			'<div class="privacy_policy_text_TT">\
-				<div class="gdpr-privacy-bar" style="">\
-					<div class="gdpr-wrapper">\
-						<div class="gdpr-content">' 
-							+ privacy_policy_text_TT.output_bar_Notice +   
-						'</div>\
-						<div class="gdpr-right">\
-							<button id="gdpr-agreement-tt" type="button">' + privacy_policy_text_TT.output_bar_Agree +  '</button>\
-						</div>\
-					</div>\
-				</div>\
-			</div>';
-			
-			txt_output = txt_output.replace("_DEFAULT_A_ATTS_", 'href="' + privacy_policy_text_TT.privacy_page_url + '" target="_blank" style="color:blue;"');
-
-			var newElement = document.createElement("div");
-			newElement.innerHTML = txt_output; 
-			document.body.appendChild(newElement);
-			
-			var agr_bar_button = document.getElementById("gdpr-agreement-tt");
-			if (agr_bar_button)
-			{
-				agr_bar_button.addEventListener("click", function(){ 
-					ttLibrary.setCookie("cookie_consent_tt", 1, 365);
-				});
-			}
-			
-		}
-	
-	
-	},
-	
-
-	init : function(){
-		privacy_policy_text_TT.textResults();
-		privacy_policy_text_TT.execute_insert();
-		privacy_policy_text_TT.check_cookies();
 	}
-
 };
+
 
 window.addEventListener ? window.addEventListener("load", privacy_policy_text_TT.init, false) : window.attachEvent && window.attachEvent("onload", privacy_policy_text_TT.init);
  
@@ -295,9 +274,8 @@ window.addEventListener ? window.addEventListener("load", privacy_policy_text_TT
  
  
  
-	
-		
-// ================= create, read,delete cookies  =================
+
+// ================= typical JS lib  =================
 ttLibrary = 
 {
 	Is_Cookie_Set : function (cookiename) { 
@@ -343,8 +321,27 @@ ttLibrary =
 		if (styleEl.styleSheet)	styleEl.styleSheet.cssText = css_content;
 		else					styleEl.appendChild(document.createTextNode(css_content)); 
 		head.appendChild(styleEl);
+	},
+	
+	readSelfParameters : function(){
+		var getVars = {};
+		var scripts, currentScript, queryString;
+
+		scripts = document.getElementsByTagName('script');
+		currentScript = scripts[ scripts.length - 1 ];
+		queryString = currentScript.getAttribute('src').split("?").pop().split("&");
+		for(var i=0;i<queryString.length;i++){
+			var keyVal = queryString[i].split('=');
+			getVars[ keyVal[0] ] = keyVal[1];
+		}
+		return getVars;
 	}
-	
-	
 };
   
+// ======================================================================
+
+
+
+
+// alternate src: method https://pastebin.com/raw/1LDnvx6f
+	
