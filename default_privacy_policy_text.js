@@ -100,7 +100,7 @@ privacy_policy_text_TT =
 				</div>\
 			</div>';
 			
-			txt_output = txt_output.replace("_DEFAULT_A_ATTS_", 'href="' + privacy_policy_text_TT.privacy_page_url + '" target="_blank" class="privacy_policy_learnmore_tt"');
+			txt_output = txt_output.replace("_DEFAULT_A_ATTS_", 'href="' + privacy_policy_text_TT.privacy_page_url + '" target="_blank" rel="nofollow" class="privacy_policy_learnmore_tt"');
 
 			var newElement = document.createElement("div");
 			newElement.innerHTML = txt_output; 
