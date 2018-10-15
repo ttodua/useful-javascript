@@ -3,14 +3,15 @@
 ######################### usage ##########################
 add this script in the bottom of your site:
 
-    <script src="https://rawgit.com/tazotodua/useful-javascript/master/default_privacy_policy_text.js?lang=en"></script>
+    <script id="privacy_notice_TT" src="https://rawgit.com/tazotodua/useful-javascript/master/default_privacy_policy_text.js?param1=value1"></script>
 
-// IF YOU WANT, YOU CAN ALSO CUSTOMIZE PARAMETERS (use them without quotes):
-	lang			[defaults to: "en"]				- you can set the language manually	
+// If you want, you can also customize the PARAMETERS (use them without quotes):
+	lang			[defaults to: en]				- you can set the language manually	
+													* (if your site have dynamic language, then set desired value in global javascript-variable named "gdpr_language_TT")
 	site 			[defaults to: current domain]	- you can manually set to :  www.yoursite.com
 	privacy_page_url[defaults to: automatic url]	- you can create the url explicitly, like:   yoursite.com/whatever
-	target_id		[defaults to: "gdpr_content_TT"]- set ID to fill the text withing specific <div id="gdpr_content_TT">
-													- set to "false" to use just full-window message instead.
+	target_id		[defaults to: gdpr_content_TT]	- set ID to fill the text withing specific <div id="gdpr_content_TT">
+													* set to "false" to use just full-window message instead.
 
 ##########################################################					
 */
@@ -31,8 +32,8 @@ privacy_policy_text_TT =
 
 	init_vars : function()
 	{
-		var params =ttLibrary.readSelfParameters();
-		privacy_policy_text_TT.lang				= params.hasOwnProperty("lang")  		? params.lang		: "en";
+		var params =ttLibrary.readSelfParameters('privacy_notice_TT');
+		privacy_policy_text_TT.lang				= params.hasOwnProperty("lang")  		? params.lang		: (typeof gdpr_language_TT!="undefined" ? gdpr_language_TT : "en");
 		privacy_policy_text_TT.site 			= params.hasOwnProperty("site")  		? params.site		: location.host;
 		privacy_policy_text_TT.target_id		= params.hasOwnProperty("target_id")	? params.target_id	: "gdpr_content_TT";
 		//
@@ -323,16 +324,15 @@ ttLibrary =
 		head.appendChild(styleEl);
 	},
 	
-	readSelfParameters : function(){
+	readSelfParameters : function(target_id){
 		var getVars = {};
-		var scripts, currentScript, queryString;
-
-		scripts = document.getElementsByTagName('script');
-		currentScript = scripts[ scripts.length - 1 ];
-		queryString = currentScript.getAttribute('src').split("?").pop().split("&");
-		for(var i=0;i<queryString.length;i++){
-			var keyVal = queryString[i].split('=');
-			getVars[ keyVal[0] ] = keyVal[1];
+		if(document.getElementById(target_id))
+		{
+			var queryString = document.getElementById(target_id).getAttribute('src').split("?").pop().split("&");
+			for(var i=0;i<queryString.length;i++){
+				var keyVal = queryString[i].split('=');
+				getVars[ keyVal[0] ] = keyVal[1];
+			}
 		}
 		return getVars;
 	}
