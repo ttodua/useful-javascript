@@ -241,8 +241,7 @@ Our website is committed to protecting your privacy. We use the information we c
 	execute_insert : function()
 	{
 		var txt_output = '<style>.privacy_policy_text_TT{ margin: 50px 50px 100px; }</style>' + privacy_policy_text_TT.output_privacy;
-		
-		if ( privacy_policy_text_TT.target_id!="false" && document.getElementById(privacy_policy_text_TT.target_id) ){
+		if ( privacy_policy_text_TT.target_id != "false" && document.getElementById(privacy_policy_text_TT.target_id) ){
 			document.getElementById(privacy_policy_text_TT.target_id).innerHTML = txt_output;
 		}
 		//else if	()
@@ -260,6 +259,7 @@ Our website is committed to protecting your privacy. We use the information we c
 		{
 			if ( ttLibrary.url_contains(privacy_policy_text_TT.default_query) )
 			{
+				document.getElementsByTagName("head")[0].insertAdjacentHTML("beforeend", '<meta name="robots" content="noindex, nofollow">');
 				document.body.innerHTML = txt_output;
 			}
 		}
