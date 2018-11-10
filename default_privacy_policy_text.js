@@ -12,6 +12,7 @@ add this script in the bottom of your site:
 	privacy_page_url[defaults to: automatic url]	- you can create the url explicitly, like:   yoursite.com/whatever
 	target_id		[defaults to: gdpr_content_TT]	- set ID to fill the text withing specific <div id="gdpr_content_TT">
 													* set to "false" to use just full-window message instead.
+	a_id			[defaults to: ""]				- set ID to fill that with link "<a href="">Privacy Policy</a>"
 
 ##########################################################					
 */
@@ -36,9 +37,10 @@ privacy_policy_text_TT =
 		privacy_policy_text_TT.lang				= params.hasOwnProperty("lang")  		? params.lang		: (typeof gdpr_language_TT!="undefined" ? gdpr_language_TT : "en");
 		privacy_policy_text_TT.site 			= params.hasOwnProperty("site")  		? params.site		: location.host;
 		privacy_policy_text_TT.target_id		= params.hasOwnProperty("target_id")	? params.target_id	: "gdpr_content_TT";
+		privacy_policy_text_TT.a_id				= params.hasOwnProperty("a_id")			? params.a_id		: false;
 		//
 		privacy_policy_text_TT.default_query	= 'default_privacy_policy_page=show';
-		privacy_policy_text_TT.privacy_page_url	=  params.hasOwnProperty("privacy_page_url")? params.privacy_page_url : (location.href.indexOf('?') <0 ? '?' : '&') + 'default_privacy_policy_page=show';
+		privacy_policy_text_TT.privacy_page_url	=  params.hasOwnProperty("privacy_page_url")? params.privacy_page_url :  "#"+ privacy_policy_text_TT.default_query; //(location.href.indexOf('?') <0 ? '?' : '&')
 	},
 
 	capitalizeFirstLetter : function(string)
@@ -129,6 +131,7 @@ privacy_policy_text_TT =
 
 		if (lang == "en") 
 		{
+			privacy_policy_text_TT.privacy_polivy 		= 'Privacy Policy';
 			privacy_policy_text_TT.output_bar_Notice	= 'Our site uses cookies. Using our site means that you accept the privacy policy & terms (<a _DEFAULT_A_ATTS_>learn more</a>).';
 			privacy_policy_text_TT.output_bar_Agree 	= 'I agree';
 			privacy_policy_text_TT.output_privacy		= 
@@ -185,6 +188,7 @@ Our website is committed to protecting your privacy. We use the information we c
 		
 		else if (lang == "ge") 
 		{
+			privacy_policy_text_TT.privacy_polivy 		= 'კონფიდენციალურობის პოლიტიკა';
 			privacy_policy_text_TT.output_bar_Notice	= 'საიტი იყენებს "cookies"-ებს. საიტის გამოყენებით თქვენ ეთანხმებით აღნიშნული საიტის მოხმარებისა და კონფიდენციალობის წესებს (<a _DEFAULT_A_ATTS_>დამატებითი ცნობები</a>).';
 			privacy_policy_text_TT.output_bar_Agree 	= 'გასაგებია';
 			privacy_policy_text_TT.output_privacy 		= 
@@ -255,22 +259,22 @@ Our website is committed to protecting your privacy. We use the information we c
 			//}
 			//parent.insertBefore(newElement, thisScript.nextSibling);
 		//}
-		else
+		else if ( ttLibrary.url_contains(privacy_policy_text_TT.default_query) )
 		{
-			if ( ttLibrary.url_contains(privacy_policy_text_TT.default_query) )
-			{
-				document.getElementsByTagName("head")[0].insertAdjacentHTML("beforeend", '<meta name="robots" content="noindex, nofollow">');
-				document.body.innerHTML = txt_output;
-			}
+			document.getElementsByTagName("head")[0].insertAdjacentHTML("beforeend", '<meta name="robots" content="noindex, nofollow">');
+			document.body.innerHTML = txt_output;
+		}
+
+		if (privacy_policy_text_TT.a_id && document.getElementById(privacy_policy_text_TT.a_id) ){
+			document.getElementById(privacy_policy_text_TT.a_id).innerHTML	= privacy_policy_text_TT.privacy_polivy;
+			document.getElementById(privacy_policy_text_TT.a_id).href		= '#'+privacy_policy_text_TT.default_query;
+			document.getElementById(privacy_policy_text_TT.a_id).setAttribute("target","_blank");
 		}
 	}
 };
 
 
 window.addEventListener ? window.addEventListener("load", privacy_policy_text_TT.init, false) : window.attachEvent && window.attachEvent("onload", privacy_policy_text_TT.init);
- 
-
- 
  
  
  
@@ -311,7 +315,7 @@ ttLibrary =
 	
 	
 	url_contains : function (string) {
-		return window.location.href.search("[?&]" + string) != -1;
+		return window.location.href.search(string) != -1;
 	},
 	
 	insertIntoHead : function(css_content)
