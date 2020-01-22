@@ -1,4 +1,4 @@
-NOTICE: Please, include "SHOW_waiting" function ( from https://github.com/tazotodua/useful-javascript/blob/master/during-request-show-%22WAIT%22 )
+NOTICE: Please, include "SHOW_waiting" function ( from https://github.com/ttodua/useful-javascript/blob/master/during-request-show-%22WAIT%22 )
 so, during request, you will see "PLEASE WAIT" message.
 
 =============================================================================================================
@@ -7,7 +7,7 @@ so, during request, you will see "PLEASE WAIT" message.
 USAGE:		myyAjaxRequest("d=kap&e=po",  "http://mysite.com/myInfo.php",  "POST", "alert('Hi,completed: ' + responseee);",   true , "plz,WaitMeeeee");
 	
 <script type="text/javascript">
-//##################### AJAX EXAMPLES  ############## https://github.com/tazotodua/useful-javascript/ ####################
+//##################### AJAX EXAMPLES  ############## https://github.com/ttodua/useful-javascript/ ####################
 function myyAjaxRequest(parameters, url, method, YOUR_PASSED_CODES, ShowBlackground, YourWaitMessage){ pp_ShowBlackground= ShowBlackground || false;
   var method= (method || "get").toLowerCase(); var url = (url =='') ? window.location.href : url;  if (method=="get") { url= url + ( (url.indexOf('?') <= -1) ? '?' : '&') +parameters+'&CacheAvoider=' + Math.random();}  
   if(pp_ShowBlackground) {  var z = document.createElement("div"); z.id = "my_waiting_box_888";  z.innerHTML=  '<div style="background-color:black; color:white; opacity:0.9;height:8000px; left:0px;  position:fixed; top:0px; width:100%; z-index:1007;" id="ppa_shadow"> <div style="position:absolute; top:200px;left:49%; z-index: 1008;" id="ppa_load">'+ ( YourWaitMessage || '<span id="ppa_phrase" style="color:grey;font-size:24px;">LOADING...</span>')+'<br/></div></div>'; document.body.appendChild(z); }
@@ -26,7 +26,7 @@ USAGE:     myRequest_2("myParameter1=kap&e=po", "filee.php", "POST", "alert('Hii
 	
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript">
-//##################### AJAX EXAMPLES  ############## https://github.com/tazotodua/useful-javascript/ ####################
+//##################### AJAX EXAMPLES  ############## https://github.com/ttodua/useful-javascript/ ####################
 function myRequest_2(parameters,target,method, passedFunction){ alert('wait 1 sec');
 	$.post(target, parameters ,
 		function(data,status){ 
