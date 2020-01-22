@@ -3,7 +3,7 @@
 ######################### usage ##########################
 add this script in the bottom of your site:
 
-    <script id="privacy_notice_TT" src="https://rawgit.com/tazotodua/useful-javascript/master/default_privacy_policy_text.js?param1=value1"></script>
+    <script id="privacy_notice_TT" src="https://rawgit.com/ttodua/useful-javascript/master/default_privacy_policy_text.js?param1=value1"></script>
 
 // If you want, you can also customize the PARAMETERS (use them without quotes):
 	lang			[defaults to: en]				- you can set the language manually	
