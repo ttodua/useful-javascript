@@ -1,7 +1,7 @@
 //USAGE:   postForm( {deletecityy:'hihi',  surname: 'blabla'}, 'Are you sure?' , 'http://yoursite.com' , '_blank');
 
 <script type="text/javascript">
-//source: https://github.com/tazotodua/useful-javascript
+//source: https://github.com/ttodua/useful-javascript
 function postForm(params,ConfirmMessage, path, method, targett) {
 	if (typeof ConfirmMessage != 'undefined' &&  ConfirmMessage) { if(!confirm(ConfirmMessage)){return;}}
 		method=method || "POST";	path=path || "";    targett=targett || "";
