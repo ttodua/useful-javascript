@@ -29,9 +29,6 @@
 */
 var Cookiess = {
 
-	isSet(cookiename) { 
-		return document.cookie.indexOf('; '+cookiename+'=');
-	}, 
 	set(name,value,days) {
 		var expires = "";
 		if (days) {
@@ -53,15 +50,16 @@ var Cookiess = {
 	},
 	delete(name) {   
 		document.cookie = name+'=; Max-Age=-99999999;';  
+		this.set(key, "", -9999);
 	},
-	//deleteCookie(key, value, attributes) { 
-	//	set(key, this.read(key).replace(value,""), attributes);
-	//}
 	append(key, value, attributes) {
-		set(key, get(key) + value, attributes);
+		this.set(key, get(key) + value, attributes);
 	},
+	isSet(cookiename) { 
+		return document.cookie.indexOf('; '+cookiename+'=');
+	}, 
 
-	
+
 	// WORKING WITH ARRAY/OBJECTS
 	getOption(cookieName, key, defaultValue)
 	{ 
