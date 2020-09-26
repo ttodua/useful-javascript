@@ -1,11 +1,13 @@
 // ###############  simple replacement for  https://github.com/js-cookie/js-cookie  ############# //
 /*
 			USAGE:
-			
-if (CookiesLibrary.isCookieSet("myCookiename")) ....		
+...	
+if (CookiesLibrary.isCookieSet("myCookiename")) ...	// Check if Cookie exists		
 ...
-
-
+CookiesLibrary.createCookie("myCooki", "myValue", 7 );	// Create cookie to last for 7 days
+...
+var myValue = CookiesLibrary.readCookie("myCooki");	// Read cookie
+...
 
 
 
