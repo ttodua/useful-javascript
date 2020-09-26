@@ -1,6 +1,6 @@
 // ###############  simple replacement for  https://github.com/js-cookie/js-cookie  ############# //
 /*
-			USAGE:
+		<<  USAGE >>
 ...	
 if (CookiesLibrary.isCookieSet("myCookiename")) ...	// Check if Cookie exists		
 ...
@@ -8,10 +8,17 @@ CookiesLibrary.createCookie("myCooki", "myValue", 7 );	// Create cookie to last 
 ...
 var myValue = CookiesLibrary.readCookie("myCooki");	// Read cookie
 ...
+CookiesLibrary.deleteCookie("myCooki");			// Delete cookie
+...
 
-
-
-
+		<< For JSON-type cookies, to get the child value. i.e. myCookie= '{ Joseph: 27, Helena: 59, Mike: 32 }';
+...
+var age = getCookieOption("myCooki", "Joseph");	// Read item
+...
+setCookieOption("myCooki", "Luciano", 43);	// Add new item
+...
+deleteCookieOption("myCooki", "Luciano");	// Delete item
+...
 
 */
 var CookiesLibrary = {
@@ -39,7 +46,7 @@ var CookiesLibrary = {
 		}
 		return null;
 	},
-	eraseCookie(name) {   
+	deleteCookie(name) {   
 		document.cookie = name+'=; Max-Age=-99999999;';  
 	},
 
@@ -69,7 +76,7 @@ var CookiesLibrary = {
 		Cookies.set(cookieName, JSON.stringify(parsed), attributes);
 		return parsed;
 	},
-	unsetCookieOption(cookieName, key, attributes)
+	deleteCookieOption(cookieName, key, attributes)
 	{
 		var cookie = Cookies.get(cookieName);
 		var parsed = {};
