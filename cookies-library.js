@@ -1,6 +1,6 @@
 // ###############  simple replacement for  https://github.com/js-cookie/js-cookie  ############# //
 /*
-		<<  USAGE >>
+		###  USAGE  ###
 ...	
 if (CookiesLibrary.isCookieSet("myCookiename")) ...	// Check if Cookie exists		
 ...
@@ -11,14 +11,24 @@ var myValue = CookiesLibrary.readCookie("myCooki");	// Read cookie
 CookiesLibrary.deleteCookie("myCooki");			// Delete cookie
 ...
 
-		<< For JSON-type cookies, to get the child value. i.e. myCookie= '{ Joseph: 27, Helena: 59, Mike: 32 }';
+		### For JSON-type cookies, to get the child value. i.e. myCookie= '{ Joseph: 27, Helena: 59, Mike: 32 }';  ###
 ...
-var age = getCookieOption("myCooki", "Joseph");	// Read item
+var age = CookiesLibrary.getCookieOption("myCooki", "Joseph");	// Read item
 ...
-setCookieOption("myCooki", "Luciano", 43);	// Add new item
+CookiesLibrary.setCookieOption("myCooki", "Luciano", 43);	// Add new item
 ...
-deleteCookieOption("myCooki", "Luciano");	// Delete item
+CookiesLibrary.deleteCookieOption("myCooki", "Luciano");	// Delete item
 ...
+
+		### For JSON-type cookies, with SUB-objects. i.e. myCookie= '{ Joseph: {height:185, age:27}, Helena:  {height:173, age:59}  }'; ###
+...
+var object = CookiesLibrary.getCookieOptionObject("myCooki", "Joseph");	// Read item
+...
+CookiesLibrary.setCookieOptionObject("myCooki", "Luciano",  "height", 153);	// Set item
+CookiesLibrary.setCookieOptionObject("myCooki", "Luciano",  "age",    43);	// Set item
+		### For JSON-type cookies, with SUB-arrays. i.e. myCookie= '{ Joseph: ['Canada','Spain'], Helena: ['USA', France']  }'; ###
+CookiesLibrary.setCookieOptionArray("myCooki", "Joseph",  "Croatia",   true);	// Add item in array
+CookiesLibrary.setCookieOptionArray("myCooki", "Joseph",  "Canada",    false);	// Remove item from array
 
 */
 var CookiesLibrary = {
@@ -90,7 +100,7 @@ var CookiesLibrary = {
 		return parsed;
 	}, 
 	//sub-array
-	getCookieOptionObject(cookieName, key, subKey, subValue){
+	getCookieOptionObject(cookieName, key){
 		return JSON.parse( this.getCookieOption(cookieName, key, "{}") );
 	},
 	setCookieOptionObject(cookieName, key, subKey, subValue){
