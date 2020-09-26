@@ -7,33 +7,32 @@
 ########################################  USAGE  #############################################
 	
 ### For simple cookies:
-	if (CookiesLibrary.isCookieSet("myCookiename")) ...	// Check if Cookie exists	
-	CookiesLibrary.createCookie("myCooki", "myValue", 7 );	// Create cookie to last for 7 days
-	var myValue = CookiesLibrary.readCookie("myCooki");	// Read cookie
-	CookiesLibrary.deleteCookie("myCooki");			// Delete cookie
+	if (Cookiess.isSet("myCookiename")) ...	// Check if Cookie exists	
+	Cookiess.create("myCooki", "myValue", 7 );// Create cookie to last for 7 days
+	var myValue = Cookiess.read("myCooki");	// Read cookie
+	Cookiess.delete("myCooki");		// Delete cookie
 
 ### For JSON-type cookies, to get the child value. i.e. myCookie= '{ Joseph: 27, Helena: 59, Mike: 32 }';  ###
-	var age = CookiesLibrary.getCookieOption("myCooki", "Joseph");	// Read item
-	CookiesLibrary.setCookieOption("myCooki", "Luciano", 43);	// Add new item
-	CookiesLibrary.deleteCookieOption("myCooki", "Luciano");	// Delete item
+	var age = Cookiess.getOption("myCooki", "Joseph");	// Read item
+	Cookiess.setOption("myCooki", "Luciano", 43);		// Add new item
+	Cookiess.deleteOption("myCooki", "Luciano");		// Delete item
 
 ### For JSON-type cookies, with SUB-objects. i.e. myCookie= '{ Joseph: {height:185, age:27}, Helena:  {height:173, age:59}  }'; ###
-	var object = CookiesLibrary.getCookieOptionObject("myCooki", "Joseph");	// Read item
-	CookiesLibrary.setCookieOptionObject("myCooki", "Luciano",  "height", 153);	// Set item
-	CookiesLibrary.setCookieOptionObject("myCooki", "Luciano",  "age",    43);	// Set item
+	var object = Cookiess.getOptionObject("myCooki", "Joseph");	// Read item
+	Cookiess.setOptionObject("myCooki", "Luciano",  "height", 153);	// Set item
+	Cookiess.setOptionObject("myCooki", "Luciano",  "age",    43);	// Set item
 	
 ### For JSON-type cookies, with SUB-arrays. i.e. myCookie= '{ Joseph: ['Canada','Spain'], Helena: ['USA', France']  }'; ###
-	CookiesLibrary.setCookieOptionArray("myCooki", "Joseph",  "Croatia",   true);	// Add item in array
-	CookiesLibrary.setCookieOptionArray("myCooki", "Joseph",  "Canada",    false);	// Remove item from array
+	Cookiess.setOptionArray("myCooki", "Joseph",  "Croatia",   true);	// Add item in array
+	Cookiess.setOptionArray("myCooki", "Joseph",  "Canada",    false);// Remove item from array
 
 */
-var CookiesLibrary = {
+var Cookiess = {
 
-	isCookieSet(cookiename) { 
+	isSet(cookiename) { 
 		return document.cookie.indexOf('; '+cookiename+'=');
-	},
-		
-	createCookie(name,value,days) {
+	}, 
+	set(name,value,days) {
 		var expires = "";
 		if (days) {
 			var date = new Date();
@@ -42,7 +41,7 @@ var CookiesLibrary = {
 		}
 		document.cookie = name + "=" + (value || "")  + expires + "; path=/";
 	},
-	readCookie(name) {
+	get(name) {
 		var nameEQ = name + "=";
 		var ca = document.cookie.split(';');
 		for(var i=0;i < ca.length;i++) {
@@ -52,15 +51,21 @@ var CookiesLibrary = {
 		}
 		return null;
 	},
-	deleteCookie(name) {   
+	delete(name) {   
 		document.cookie = name+'=; Max-Age=-99999999;';  
 	},
+	//deleteCookie(key, value, attributes) { 
+	//	set(key, this.read(key).replace(value,""), attributes);
+	//}
+	append(key, value, attributes) {
+		set(key, get(key) + value, attributes);
+	},
 
-	// extensions for COOKIE plugin
-	//
-	getCookieOption(cookieName, key, defaultValue)
+	
+	// WORKING WITH ARRAY/OBJECTS
+	getOption(cookieName, key, defaultValue)
 	{ 
-		var existingValue = Cookies.get(cookieName);
+		var existingValue = this.get(cookieName);
 		if(existingValue)
 		{
 			var parsed = JSON.parse(existingValue);
@@ -69,9 +74,9 @@ var CookiesLibrary = {
 		}
 		return defaultValue;
 	},
-	setCookieOption(cookieName, key, value, attributes)
+	setOption(cookieName, key, value, attributes)
 	{
-		var cookie = Cookies.get(cookieName);
+		var cookie = this.get(cookieName);
 		var parsed = {};
 		if(cookie)
 		{
@@ -79,12 +84,12 @@ var CookiesLibrary = {
 		}
 		parsed[key] = value;
 		var attributes = attributes ||  { expires: 99999 };
-		Cookies.set(cookieName, JSON.stringify(parsed), attributes);
+		this.set(cookieName, JSON.stringify(parsed), attributes);
 		return parsed;
 	},
-	deleteCookieOption(cookieName, key, attributes)
+	deleteOption(cookieName, key, attributes)
 	{
-		var cookie = Cookies.get(cookieName);
+		var cookie = this.get(cookieName);
 		var parsed = {};
 		if(cookie)
 		{
@@ -92,22 +97,22 @@ var CookiesLibrary = {
 		}
 		if(key in parsed) delete parsed[key];
 		var attributes = attributes ||  { expires: 99999 };
-		Cookies.set(cookieName, JSON.stringify(parsed), attributes);
+		this.set(cookieName, JSON.stringify(parsed), attributes);
 		return parsed;
 	}, 
 	//sub-array
-	getCookieOptionObject(cookieName, key){
-		return JSON.parse( this.getCookieOption(cookieName, key, "{}") );
+	getOptionObject(cookieName, key){
+		return JSON.parse( this.getOption(cookieName, key, "{}") );
 	},
-	setCookieOptionObject(cookieName, key, subKey, subValue){
-		var existing = JSON.parse( this.getCookieOption(cookieName, key, "{}") );
+	setOptionObject(cookieName, key, subKey, subValue){
+		var existing = JSON.parse( this.getOption(cookieName, key, "{}") );
 		if (subValue==null) delete existing[subKey];
 		else existing[subKey]=subValue;
-		this.setCookieOption(cookieName, key, JSON.stringify(existing));
+		this.setOption(cookieName, key, JSON.stringify(existing));
 	},
-	setCookieOptionArray(cookieName, key, subValue, Add_or_remove)
+	setOptionArray(cookieName, key, subValue, Add_or_remove)
 	{
-		var existing = JSON.parse( this.getCookieOption(cookieName, key, "[]") );
+		var existing = JSON.parse( this.getOption(cookieName, key, "[]") );
 		if (Add_or_remove && !existing.includes(subValue) )
 		{
 			existing.push(subValue);
@@ -116,7 +121,7 @@ var CookiesLibrary = {
 		{
 			existing = this.removeItem(existing, subValue);
 		}
-		this.setCookieOption(cookieName, key, JSON.stringify(existing));
+		this.setOption(cookieName, key, JSON.stringify(existing));
 	}
   
 };
