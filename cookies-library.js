@@ -1,6 +1,6 @@
 /*   
 	##############################################################################################
-	###############  simple replacement for  https://github.com/js-cookie/js-cookie  #############
+	############### my custom solution alike https://github.com/js-cookie/js-cookie  #############
 	############### https://github.com/ttodua/useful-javascript/edit/master/cookies-library.js ###
 	##############################################################################################
 	
