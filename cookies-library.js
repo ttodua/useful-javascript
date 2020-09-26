@@ -1,6 +1,20 @@
+// ###############  simple replacement for  https://github.com/js-cookie/js-cookie  ############# //
+/*
+			USAGE:
+			
+if (CookiesLibrary.isCookieSet("myCookiename")) ....		
+...
+
+
+
+
+
+
+
+*/
 var CookiesLibrary = {
 
-	Is_Cookie_Set(cookiename) { 
+	isCookieSet(cookiename) { 
 		return document.cookie.indexOf('; '+cookiename+'=');
 	},
 		
