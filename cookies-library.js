@@ -1,34 +1,30 @@
-// ###############  simple replacement for  https://github.com/js-cookie/js-cookie  ############# //
-/*
-		###  USAGE  ###
-...	
-if (CookiesLibrary.isCookieSet("myCookiename")) ...	// Check if Cookie exists		
-...
-CookiesLibrary.createCookie("myCooki", "myValue", 7 );	// Create cookie to last for 7 days
-...
-var myValue = CookiesLibrary.readCookie("myCooki");	// Read cookie
-...
-CookiesLibrary.deleteCookie("myCooki");			// Delete cookie
-...
+/*   
+	##############################################################################################
+	###############  simple replacement for  https://github.com/js-cookie/js-cookie  #############
+	############### https://github.com/ttodua/useful-javascript/edit/master/cookies-library.js ###
+	##############################################################################################
+	
+########################################  USAGE  #############################################
+	
+### For simple cookies:
+	if (CookiesLibrary.isCookieSet("myCookiename")) ...	// Check if Cookie exists	
+	CookiesLibrary.createCookie("myCooki", "myValue", 7 );	// Create cookie to last for 7 days
+	var myValue = CookiesLibrary.readCookie("myCooki");	// Read cookie
+	CookiesLibrary.deleteCookie("myCooki");			// Delete cookie
 
-		### For JSON-type cookies, to get the child value. i.e. myCookie= '{ Joseph: 27, Helena: 59, Mike: 32 }';  ###
-...
-var age = CookiesLibrary.getCookieOption("myCooki", "Joseph");	// Read item
-...
-CookiesLibrary.setCookieOption("myCooki", "Luciano", 43);	// Add new item
-...
-CookiesLibrary.deleteCookieOption("myCooki", "Luciano");	// Delete item
-...
+### For JSON-type cookies, to get the child value. i.e. myCookie= '{ Joseph: 27, Helena: 59, Mike: 32 }';  ###
+	var age = CookiesLibrary.getCookieOption("myCooki", "Joseph");	// Read item
+	CookiesLibrary.setCookieOption("myCooki", "Luciano", 43);	// Add new item
+	CookiesLibrary.deleteCookieOption("myCooki", "Luciano");	// Delete item
 
-		### For JSON-type cookies, with SUB-objects. i.e. myCookie= '{ Joseph: {height:185, age:27}, Helena:  {height:173, age:59}  }'; ###
-...
-var object = CookiesLibrary.getCookieOptionObject("myCooki", "Joseph");	// Read item
-...
-CookiesLibrary.setCookieOptionObject("myCooki", "Luciano",  "height", 153);	// Set item
-CookiesLibrary.setCookieOptionObject("myCooki", "Luciano",  "age",    43);	// Set item
-		### For JSON-type cookies, with SUB-arrays. i.e. myCookie= '{ Joseph: ['Canada','Spain'], Helena: ['USA', France']  }'; ###
-CookiesLibrary.setCookieOptionArray("myCooki", "Joseph",  "Croatia",   true);	// Add item in array
-CookiesLibrary.setCookieOptionArray("myCooki", "Joseph",  "Canada",    false);	// Remove item from array
+### For JSON-type cookies, with SUB-objects. i.e. myCookie= '{ Joseph: {height:185, age:27}, Helena:  {height:173, age:59}  }'; ###
+	var object = CookiesLibrary.getCookieOptionObject("myCooki", "Joseph");	// Read item
+	CookiesLibrary.setCookieOptionObject("myCooki", "Luciano",  "height", 153);	// Set item
+	CookiesLibrary.setCookieOptionObject("myCooki", "Luciano",  "age",    43);	// Set item
+	
+### For JSON-type cookies, with SUB-arrays. i.e. myCookie= '{ Joseph: ['Canada','Spain'], Helena: ['USA', France']  }'; ###
+	CookiesLibrary.setCookieOptionArray("myCooki", "Joseph",  "Croatia",   true);	// Add item in array
+	CookiesLibrary.setCookieOptionArray("myCooki", "Joseph",  "Canada",    false);	// Remove item from array
 
 */
 var CookiesLibrary = {
