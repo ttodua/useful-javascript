@@ -1,11 +1,10 @@
-/*   
-	##############################################################################################
-	############### Extended functionalities of  https://github.com/js-cookie/js-cookie ##########
-	############### https://github.com/ttodua/useful-javascript/edit/master/cookies-library.js ###
-	##############################################################################################
+/*
+############################################################################################################
+############### [https://github.com/ttodua/useful-javascript/edit/master/cookies-library.js] ###############
+######################## Enriched version of https://github.com/js-cookie/js-cookie ########################
+############################################################################################################
 	
-########################################  USAGE  #############################################
-	
+###############################################  USAGE  ####################################################
 ### For simple cookies:
 	if (Cookiess.isset("myCookiename")) ...	// Check if Cookie exists	
 	Cookiess.set("myCooki", "myValue", 7 );	// Create cookie to last for 7 days
@@ -25,8 +24,9 @@
 ### For JSON-type cookies, with SUB-arrays. i.e. myCookie= '{ Joseph: ['Canada','Spain'], Helena: ['USA', France']  }'; ###
 	Cookiess.setOptionArray("myCooki", "Joseph",  "Croatia",   true);	// Add item in array
 	Cookiess.setOptionArray("myCooki", "Joseph",  "Canada",    false);	// Remove item from array
-
+############################################################################################################
 */
+
 Cookiess = {
 	get(a,b) { return this.cookies_instance().get(a,b); },
 	set(a,b,c) { return this.cookies_instance().set(a,b);  },
