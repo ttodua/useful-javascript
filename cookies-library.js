@@ -7,15 +7,15 @@
 ########################################  USAGE  #############################################
 	
 ### For simple cookies:
-	if (Cookiess.isSet("myCookiename")) ...	// Check if Cookie exists	
-	Cookiess.create("myCooki", "myValue", 7 );// Create cookie to last for 7 days
-	var myValue = Cookiess.read("myCooki");	// Read cookie
-	Cookiess.delete("myCooki");		// Delete cookie
+	if (Cookiess.isset("myCookiename")) ...	// Check if Cookie exists	
+	Cookiess.set("myCooki", "myValue", 7 );	// Create cookie to last for 7 days
+	var myValue = Cookiess.get("myCooki");	// Read cookie
+	Cookiess.remove("myCooki");		// Delete cookie
 
 ### For JSON-type cookies, to get the child value. i.e. myCookie= '{ Joseph: 27, Helena: 59, Mike: 32 }';  ###
 	var age = Cookiess.getOption("myCooki", "Joseph");	// Read item
 	Cookiess.setOption("myCooki", "Luciano", 43);		// Add new item
-	Cookiess.deleteOption("myCooki", "Luciano");		// Delete item
+	Cookiess.removeOption("myCooki", "Luciano");		// Delete item
 
 ### For JSON-type cookies, with SUB-objects. i.e. myCookie= '{ Joseph: {height:185, age:27}, Helena:  {height:173, age:59}  }'; ###
 	var object = Cookiess.getOptionObject("myCooki", "Joseph");	// Read item
@@ -24,7 +24,7 @@
 	
 ### For JSON-type cookies, with SUB-arrays. i.e. myCookie= '{ Joseph: ['Canada','Spain'], Helena: ['USA', France']  }'; ###
 	Cookiess.setOptionArray("myCooki", "Joseph",  "Croatia",   true);	// Add item in array
-	Cookiess.setOptionArray("myCooki", "Joseph",  "Canada",    false);// Remove item from array
+	Cookiess.setOptionArray("myCooki", "Joseph",  "Canada",    false);	// Remove item from array
 
 */
 Cookiess = {
@@ -55,7 +55,7 @@ Cookiess = {
 		this.set(cookieName, JSON.stringify(parsed), attributes);
 		return parsed;
 	},
-	deleteOption(cookieName, key, attributes)
+	removeOption(cookieName, key, attributes)
 	{
 		var cookie = this.get(cookieName);
 		var parsed = {};
