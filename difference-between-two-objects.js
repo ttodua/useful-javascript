@@ -70,4 +70,4 @@ function ObjectsDiff(o1,o2) {
     ];
 }
 
-console.log( ObjectsDiff (a,b));
+console.log( ObjectsDiff(a,b));
